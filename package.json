@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "axios": "^0.21.4"
+  },
+  "devDependencies": {
+    "prettier": "^2.4.1"
+  }
+}
