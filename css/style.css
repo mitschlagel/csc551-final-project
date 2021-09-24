@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Shrikhand&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap");
+
+body {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #104703;
+  padding: 30px 0 20px 0;
+}
+
+.header-title {
+  display: flex;
+  align-items: flex-start;
+}
+
+.header-image {
+  width: 60px;
+  padding-right: 20px;
+  align-self: center;
+}
+
+header h1 {
+  color: white;
+  font-family: "Shrikhand", cursive;
+  letter-spacing: 4px;
+  font-size: 3rem;
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+
+nav li {
+  padding: 2rem 1rem;
+  display: inline;
+}
+
+li > a {
+  color: white;
+  text-decoration: none;
+  text-transform: lowercase;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+}
+
+li > a:hover {
+  color: rgb(133, 126, 111);
+}
+
+#this {
+  color: rgb(133, 126, 111);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.hide {
+  display: none;
+}
+
+.player-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.player-form-section {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.player-form-section:last-child {
+  text-align: center;
+}
