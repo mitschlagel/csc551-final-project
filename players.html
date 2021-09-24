@@ -6,19 +6,14 @@
     <title>didtheyplay.soccer</title>
     <link rel="stylesheet" href="css/style.css" />
     <script src="./node_modules/axios/dist/axios.min.js"></script>
-    
-    
-    
-     
-      
-     
   </head>
+
   <body>
     <header>
       <div class="header-title">
-      <img class="header-image" src="img/ball.png" />
-      <h1>didtheyplay.soccer?</h1>
-    </div>
+        <img class="header-image" src="img/ball.png" />
+        <h1>didtheyplay.soccer?</h1>
+      </div>
       <nav class="header-nav">
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -29,19 +24,19 @@
         </ul>
       </nav>
     </header>
-    <div>
-      <section class="main">
-      <h2>Players</h2>
-      
-          <div class="player-form-section">
-          <label for="player-name">Player Last Name:</label>
-          <input type="search" id="player-name" required>
+    <main>
+      <section class="title">
+        <h2>Players</h2>
+      </section>
+      <section class="player-search-form">
+        <div class="player-form-section">
+          <label for="player-name">Name:</label>
+          <input type="search" id="player-name" required />
         </div>
         <div class="player-form-section">
-          <!-- <label for="league-name">League:</label> -->
+          <label for="league-name">League:</label>
           <select id="league-name" name="league-name" required>
-            
-            <option id="default">Select a competition...</option>
+            <option selected="selected" disabled="disabled"></option>
             <option value="2" id="champions">UEFA Champions League</option>
             <option value="3" id="europa">UEFA Europa League</option>
             <option value="39" id="england">England - Premier League</option>
@@ -54,10 +49,61 @@
         <div class="player-form-section">
           <button id="player-search-submit">Search</button>
         </div>
-      
-  </section>
+      </section>
+      <section class="player-profile">
+        <div class="player-profile-header">
+          <h2>Matthew Hoppe</h2>
+        </div>
+        <div class="player-profile-body">
+          <div class="name-photo">
+            <img
+              src="https://media.api-sports.io/football/players/203014.png"
+            />
+          </div>
+          <div class="bio-info">
+            <div>
+              <ul>
+                <li>DOB (age): 2001-03-13 (20)</li>
+                <li>Nationality: USA</li>
+                <li>Position: Attacker</li>
+              </ul>
+            </div>
+            <div class="bio-stats">
+              <!-- look at api response, if minutes or appearences YES and green, else, red and NO -->
 
-  <script src="getStats.js"></script>
+              <ul>
+                <li>Did they play? <span class="did-they-play">YES</span></li>
+                <li>Total appearences: 2</li>
+                <li>Total Minutes: 89</li>
+                <li>Goals: 0</li>
+                <li>Assists: 0</li>
+              </ul>
+            </div>
+          </div>
+          <div class="club-info">
+            <img
+              id="club-logo"
+              src="https://media.api-sports.io/football/teams/798.png"
+            />
+            <ul>
+              <li>RCD Mallorca</li>
+              <li>
+                <img
+                  id="league-logo"
+                  src="https://media.api-sports.io/football/leagues/140.png"
+                />
+                La Liga
+              </li>
+              <li>
+                <img id="flag" src=https://media.api-sports.io/flags/es.svg />
+                Spain
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/getStats.js"></script>
   </body>
 </html>
-

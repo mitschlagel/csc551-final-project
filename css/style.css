@@ -57,28 +57,97 @@ li > a:hover {
   color: rgb(133, 126, 111);
 }
 
-.main {
+main {
+  width: 100%;
   display: flex;
   flex-direction: column;
-
-  justify-content: center;
   align-items: center;
+  justify-content: flex-start;
 }
 
 .hide {
   display: none;
 }
 
-.player-form {
+.player-search-form {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
 }
 
 .player-form-section {
-  margin-bottom: 10px;
-  text-align: center;
+  margin: 10px;
 }
 
-.player-form-section:last-child {
-  text-align: center;
+.player-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 20px;
+  background-color: rgba(133, 126, 111, 0.2);
+  padding: 20px;
+}
+
+.player-profile-body {
+  display: flex;
+  flex-direction: row;
+}
+
+.player-profile h2 {
+  padding: 0 0 10px 0;
+  margin: 0;
+}
+
+.player-profile ul {
+  margin-top: 0;
+  padding: 0;
+}
+.player-profile li {
+  display: block;
+}
+
+.name-photo {
+  padding: 20px;
+}
+.name-photo > img {
+  border: 2px solid black;
+}
+
+.bio-info {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.club-info {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  justify-content: baseline;
+}
+
+.club-info > img {
+  height: 100px;
+}
+
+.club-info ul:first-child {
+  font-size: 2rem;
+}
+
+.club-info li {
+  font-size: 1em;
+  padding-bottom: 1rem;
+}
+.club-info > ul > li > img {
+  height: 1rem;
+  padding-right: 0.5rem;
+}
+
+.did-they-play {
+  background-color: green;
+  color: white;
+  font-weight: 900;
+  padding: 0 1rem;
 }
