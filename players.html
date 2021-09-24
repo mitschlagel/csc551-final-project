@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>didtheyplay.soccer</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    
+    
+    
+     
+      
+     
+  </head>
+  <body>
+    <header>
+      <div class="header-title">
+      <img class="header-image" src="img/ball.png" />
+      <h1>didtheyplay.soccer?</h1>
+    </div>
+      <nav class="header-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="players.html" id="this">Players</a></li>
+          <li><a href="/">Fixtures</a></li>
+          <li><a href="tables.html">Tables</a></li>
+          <li><a href="/">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div>
+      <section class="main">
+      <h2>Players</h2>
+      
+          <div class="player-form-section">
+          <label for="player-name">Player Last Name:</label>
+          <input type="search" id="player-name" required>
+        </div>
+        <div class="player-form-section">
+          <!-- <label for="league-name">League:</label> -->
+          <select id="league-name" name="league-name" required>
+            
+            <option id="default">Select a competition...</option>
+            <option value="2" id="champions">UEFA Champions League</option>
+            <option value="3" id="europa">UEFA Europa League</option>
+            <option value="39" id="england">England - Premier League</option>
+            <option value="78" id="germany">Germany - Bundesliga</option>
+            <option value="140" id="spain">Spain - La Liga</option>
+            <option value="61" id="france">France - Ligue 1</option>
+            <option value="135" id="italy">Italy - Serie A</option>
+          </select>
+        </div>
+        <div class="player-form-section">
+          <button id="player-search-submit">Search</button>
+        </div>
+      
+  </section>
+
+  <script src="getStats.js"></script>
+  </body>
+</html>
+
