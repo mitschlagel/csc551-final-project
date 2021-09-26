@@ -64,10 +64,6 @@ main {
   justify-content: center;
 }
 
-.hide {
-  display: none;
-}
-
 .player-search-form {
   display: flex;
   /* flex-direction: column; */
@@ -78,13 +74,10 @@ main {
 }
 
 .player-profile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 75%;
   margin-top: 20px;
   background-color: rgba(133, 126, 111, 0.2);
   padding: 20px;
+  border: 2px solid black;
 }
 
 .player-profile-body {
@@ -107,31 +100,26 @@ main {
 
 .name-photo {
   padding: 20px;
+  text-align: center;
 }
-.name-photo > img {
+
+#player-photo {
   border: 2px solid black;
 }
 
 .bio-info {
   width: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
   padding: 20px;
+  line-height: 1.5rem;
 }
 
 .club-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  justify-content: center;
+  text-align: center;
 }
 
 #club-logo {
   height: 100px;
-  padding-bottom: 20px;
+  padding: 20px 0;
 }
 
 .club-info ul:first-child {
@@ -151,5 +139,5 @@ main {
   background-color: green;
   color: white;
   font-weight: 900;
-  padding: 0 1rem;
+  padding: 1rem;
 }

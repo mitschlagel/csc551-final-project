@@ -9,7 +9,7 @@ const getStats = () => {
   const config = { "x-apisports-key": "569fd3056fbfd09a47a568e3b82163f7" };
 
   //params base on user input
-  const params = { search: player, league: league };
+  const params = { search: player, league: league, season: "2021" };
 
   axios
     .get(url, { headers: config, params: params })
@@ -23,11 +23,13 @@ const getStats = () => {
 };
 
 const displayStats = (stats) => {
+  const searchResults = document.querySelector(".players");
+  searchResults.innerHTML = "";
   stats.forEach((element) => {
     const playerProfile = document.createElement("section");
     playerProfile.classList.add("player-profile");
-    document.body.appendChild(playerProfile);
 
+    searchResults.appendChild(playerProfile);
     console.log(element.player);
     console.log(element.statistics[0]);
     const bio = element.player;
@@ -37,9 +39,10 @@ const displayStats = (stats) => {
   </div>
   <div class="player-profile-body">
     <div class="name-photo">
-      <img
+      <img id="player-photo"
         src="${bio.photo}"
       />
+      <div class="did-they-play">PLAYED</div>
     </div>
     <div class="bio-info">
       <div>
@@ -53,7 +56,7 @@ const displayStats = (stats) => {
         <!-- look at api response, if minutes or appearences YES and green, else, red and NO -->
 
         <ul>
-          <li>Did they play? <span class="did-they-play">YES</span></li>
+          
           <li>Total appearences: ${stats.games.appearences}</li>
           <li>Total Minutes: ${stats.games.minutes}</li>
           <li>Goals: ${stats.goals.total}</li>
