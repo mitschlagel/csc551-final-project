@@ -79,7 +79,10 @@ const displayStats = (stats) => {
           ${stats.league.name}
         </li>
         <li>
-          <img id="flag" src="${stats.league.flag}" />
+        
+          <img id="flag" src="${
+            stats.league.flag ? stats.league.flag : "img/earth.png"
+          } />
           ${stats.league.country}
         </li>
       </ul>

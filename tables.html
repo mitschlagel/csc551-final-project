@@ -1,118 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>didtheyplay.soccer</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="./node_modules/axios/dist/axios.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <!-- <script
-      type="module"
-      src="https://widgets.api-sports.io/football/1.1.8/widget.js"
-    ></script> -->
-    <!-- <script src="livescore.js"></script> -->
-  </head>
-  <body>
-    <header>
-      <div class="header-title">
-        <img class="header-image" src="img/ball.png" />
-        <h1>didtheyplay.soccer?</h1>
-      </div>
-      <nav class="header-nav">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="players.html">Players</a></li>
-          <li><a href="/">Fixtures</a></li>
-          <li><a href="tables.html" id="this">Tables</a></li>
-          <li><a href="/">Login</a></li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-      <section class="main">
-        <h2>Tables</h2>
-        <form>
-          <label for="league">Choose a league:</label>
-          <select id="league" name="league" onchange="changeLeague()">
-            <option value="champions">UEFA Champions League</option>
-            <option value="europa">UEFA Europa League</option>
-            <option value="england">England - Premier League</option>
-            <option value="germany">Germany - Bundesliga</option>
-            <option value="spain">Spain - La Liga</option>
-            <option value="france">France - Ligue 1</option>
-            <option value="italy">Italy - Serie A</option>
-          </select>
-        </form>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>didtheyplay.soccer</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="./node_modules/axios/dist/axios.min.js"></script>
 
-        <div id="champions" class="table hide">
-          CHAMPIONS
-          <div
-            id="wg-api-football-standings"
-            data-host="v3.football.api-sports.io"
-            data-league="2"
-            data-team=""
-            data-season="2021"
-            data-key="569fd3056fbfd09a47a568e3b82163f7"
-            data-theme=""
-            data-show-errors="false"
-            class="api_football_loader"
-          ></div>
-        </div>
+</head>
 
-        <div id="europa" class="table hide">
-          EUROPA
-          <div
-            id="wg-api-football-standings"
-            data-host="v3.football.api-sports.io"
-            data-league="3"
-            data-team=""
-            data-season="2021"
-            data-key="569fd3056fbfd09a47a568e3b82163f7"
-            data-theme=""
-            data-show-errors="false"
-            class="api_football_loader"
-          ></div>
-        </div>
+<body>
+  <header>
+    <div class="header-title">
+      <img class="header-image" src="img/ball.png" />
+      <h1>didtheyplay.soccer?</h1>
+    </div>
+    <nav class="header-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="players.html">Players</a></li>
+        <li><a href="/">Fixtures</a></li>
+        <li><a href="tables.html" id="this">Tables</a></li>
+        <li><a href="/">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="table-select">
+      <h2>Tables</h2>
+      <form>
+        <label for="league">Choose a league:</label>
+        <select id="league" name="league">
+          <option value="champions">UEFA Champions League</option>
+          <option value="europa">UEFA Europa League</option>
+          <option value="england">England - Premier League</option>
+          <option value="germany">Germany - Bundesliga</option>
+          <option value="spain">Spain - La Liga</option>
+          <option value="france">France - Ligue 1</option>
+          <option value="italy">Italy - Serie A</option>
+        </select>
+      </form>
+    </section>
+    <section class="table-main">
 
-        <div id="england" class="table hide">
-          ENGLAND
-          <div
-            id="wg-api-football-standings"
-            data-host="v3.football.api-sports.io"
-            data-league="39"
-            data-team=""
-            data-season="2021"
-            data-key="569fd3056fbfd09a47a568e3b82163f7"
-            data-theme=""
-            data-show-errors="false"
-            class="api_football_loader"
-          ></div>
-        </div>
-        <div id="germany" class="table hide">GERMANY</div>
-        <div id="spain" class="table hide">SPAIN</div>
-        <div id="france" class="table hide">FRANCE</div>
-        <div id="italy" class="table hide">
-          ITALY
-          <div
-            id="wg-api-football-standings"
-            data-host="v3.football.api-sports.io"
-            data-league="135"
-            data-team=""
-            data-season="2021"
-            data-key="569fd3056fbfd09a47a568e3b82163f7"
-            data-theme=""
-            data-show-errors="true"
-            class="api_football_loader"
-          ></div>
-        </div>
-      </section>
-      <script
-        type="module"
-        src="https://widgets.api-sports.io/football/1.1.8/widget.js"
-      ></script>
-      <script src="js/standings.js"></script>
-    </main>
-  </body>
+    </section>
+
+
+    <div id="europa" class="table hide">
+      EUROPA
+      <div id="wg-api-football-standings" data-host="v3.football.api-sports.io" data-league="3" data-team=""
+        data-season="2021" data-key="569fd3056fbfd09a47a568e3b82163f7" data-theme="" data-show-errors="false"
+        class="api_football_loader"></div>
+    </div>
+
+    <div id="england" class="table hide">
+      ENGLAND
+      <div id="wg-api-football-standings" data-host="v3.football.api-sports.io" data-league="39" data-team=""
+        data-season="2021" data-key="569fd3056fbfd09a47a568e3b82163f7" data-theme="" data-show-errors="false"
+        class="api_football_loader"></div>
+    </div>
+    <div id="germany" class="table hide">GERMANY</div>
+    <div id="spain" class="table hide">SPAIN</div>
+    <div id="france" class="table hide">FRANCE</div>
+    <div id="italy" class="table hide">
+      ITALY
+      <div id="wg-api-football-standings" data-host="v3.football.api-sports.io" data-league="135" data-team=""
+        data-season="2021" data-key="569fd3056fbfd09a47a568e3b82163f7" data-theme="" data-show-errors="true"
+        class="api_football_loader"></div>
+    </div>
+    </section>
+
+    <script src="js/tables.js"></script>
+  </main>
+</body>
+
 </html>
