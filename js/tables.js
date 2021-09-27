@@ -1,4 +1,4 @@
-const displayTable = () => {
+function displayTable() {
   const league = document.querySelector("#league").value;
   const widget = `
           <div
@@ -11,18 +11,23 @@ const displayTable = () => {
             data-theme=""
             data-show-errors="false"
             class="api_football_loader"
-          ></div>
-        </div>
+          >${league}</div>
+        
         <script
         type="module"
         src="https://widgets.api-sports.io/football/1.1.8/widget.js"
       ></script>`;
 
   const tableContainer = document.querySelector(".table-main");
+  tableContainer.innerHTML = "";
+  const table = document.createElement("div");
+  table.classList.add("league-table");
+  tableContainer.appendChild(table);
+  table.innerHTML = widget;
+}
 
-  tableContainer.innerHTML = widget;
-};
-
-document
-  .querySelector("select")
-  .addEventListener("change", () => displayTable());
+window.addEventListener("DOMContentLoaded", () => {
+  document
+    .querySelector("select")
+    .addEventListener("input", () => displayTable());
+});
