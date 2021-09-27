@@ -20,9 +20,23 @@ header {
 }
 
 .header-image {
-  width: 60px;
-  padding-right: 20px;
-  align-self: center;
+    width: 60px;
+    padding-right: 20px;
+    align-self: center;
+    position: relative;
+    animation: movingFootball linear 10s 2 1s alternate;
+}
+
+@keyframes movingFootball {
+    0% {
+        opacity: 0.5;
+        left: 0px;
+    }
+
+    100% {
+        opacity: 0.5;
+        left: 600px;
+    }
 }
 
 header h1 {
