@@ -155,3 +155,7 @@ main {
   font-weight: 900;
   padding: 1rem;
 }
+
+.player-example {
+  width: 400px;
+}
