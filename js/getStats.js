@@ -34,6 +34,7 @@ const displayStats = (stats) => {
     console.log(element.statistics[0]);
     const bio = element.player;
     const stats = element.statistics[0];
+    const birthday = new Date(bio.birth.date);
     playerProfile.innerHTML = `<div class="player-profile-header">
     <h2>${bio.firstname} ${bio.lastname}</h2>
   </div>
@@ -42,12 +43,13 @@ const displayStats = (stats) => {
       <img id="player-photo"
         src="${bio.photo}"
       />
-      <div class="did-they-play">PLAYED</div>
+      <div class="did-they-play">FOLLOW</div>
     </div>
     <div class="bio-info">
       <div>
         <ul>
-          <li>DOB (age): ${bio.birth.date} (${bio.age})</li>
+          <li>Date of Birth: ${birthday.toLocaleDateString()} </li>
+          <li>Age: ${bio.age} years old</li>
           <li>Nationality: ${bio.nationality}</li>
           <li>Position: ${stats.games.position}</li>
         </ul>
@@ -57,10 +59,10 @@ const displayStats = (stats) => {
 
         <ul>
           
-          <li>Total appearences: ${stats.games.appearences}</li>
+          <li>Total Appearences: ${stats.games.appearences}</li>
           <li>Total Minutes: ${stats.games.minutes}</li>
           <li>Goals: ${stats.goals.total}</li>
-          <li>Assists: ${stats.goals.assists}</li>
+          <li>Assists: ${stats.goals.assists || "0"}</li>
         </ul>
       </div>
     </div>
@@ -81,9 +83,12 @@ const displayStats = (stats) => {
         <li>
         
           <img id="flag" src="${
-            stats.league.flag ? stats.league.flag : "img/earth.png"
-          } />
-          ${stats.league.country}
+            stats.league.flag == null
+              ? "img/european-union.png"
+              : stats.league.flag
+          }"
+          />
+          ${stats.league.country === "World" ? "Europe" : stats.league.country}
         </li>
       </ul>
     </div>
