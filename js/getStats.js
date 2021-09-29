@@ -17,7 +17,7 @@ const getStats = () => {
     .then((response) => {
       if (response.data.results == 0) {
         const errorMessage = response.data.errors.requests;
-        const query = response.data.parameters;
+        const query = response.data.parameters.search;
 
         displayErrors(errorMessage, query);
       } else {
@@ -111,7 +111,7 @@ const displayErrors = (errorMessage, query) => {
   searchResults.appendChild(error);
 
   const message =
-    errorMessage === null
+    errorMessage === undefined
       ? `No results found for <b>${query}</b>, please try again`
       : errorMessage;
   error.innerHTML = `
