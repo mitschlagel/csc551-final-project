@@ -34,7 +34,7 @@
       <section class="player-search-form">
         <div class="player-form-section">
           <label for="player-name">Name:</label>
-          <input type="search" id="player-name" required />
+          <input type="search" id="player-name" pattern="/\s/g" required />
         </div>
         <div class="player-form-section">
           <label for="league-name">League:</label>

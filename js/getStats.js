@@ -15,8 +15,15 @@ const getStats = () => {
   axios
     .get(url, { headers: config, params: params })
     .then((response) => {
-      const stats = response.data.response;
-      displayStats(stats);
+      if (response.data.results == 0) {
+        const errorMessage = response.data.errors.requests;
+        const query = response.data.parameters;
+
+        displayErrors(errorMessage, query);
+      } else {
+        const stats = response.data.response;
+        displayStats(stats);
+      }
     })
     .catch((error) => {
       console.log(error);
@@ -95,6 +102,20 @@ const displayStats = (stats) => {
     </div>
   </div>`;
   });
+};
+
+const displayErrors = (errorMessage, query) => {
+  const searchResults = document.querySelector(".players");
+  searchResults.innerHTML = "";
+  const error = document.createElement("section");
+  searchResults.appendChild(error);
+
+  const message =
+    errorMessage === null
+      ? `No results found for <b>${query}</b>, please try again`
+      : errorMessage;
+  error.innerHTML = `
+  <div class="player-search-error">${message}</div>`;
 };
 
 document
