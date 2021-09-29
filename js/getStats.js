@@ -3,13 +3,14 @@
 const getStats = () => {
   const player = document.querySelector("#player-name").value; // this probably needs to be processed
   const league = document.querySelector("#league-name").value;
+  const season = document.querySelector("#season").value;
   const url = "https://v3.football.api-sports.io/players";
 
   // This stays constant with my key
   const config = { "x-apisports-key": "569fd3056fbfd09a47a568e3b82163f7" };
 
   //params base on user input
-  const params = { search: player, league: league, season: "2021" };
+  const params = { search: player, league: league, season: season };
 
   axios
     .get(url, { headers: config, params: params })

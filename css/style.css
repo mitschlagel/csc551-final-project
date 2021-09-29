@@ -81,7 +81,7 @@ main {
   margin-top: 20px;
   background-color: rgba(133, 126, 111, 0.2);
   padding: 20px;
-  border: 2px solid black;
+  border: 2px solid rgb(133, 126, 111);
 }
 
 .player-profile-body {
@@ -90,7 +90,7 @@ main {
 }
 
 .player-profile h2 {
-  padding: 0 0 20px 0;
+  padding: 0 0 0 20px;
   margin: 0;
 }
 
@@ -108,7 +108,7 @@ main {
 }
 
 #player-photo {
-  border: 2px solid black;
+  border: 2px solid rgb(133, 126, 111);
 }
 
 .bio-info {
@@ -142,14 +142,21 @@ main {
 }
 
 .did-they-play {
-  background-color: rgb(133, 126, 111);
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
+  color: rgb(133, 126, 111);
+  text-transform: uppercase;
   text-decoration: none;
-  font-size: 16px;
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 2px solid rgb(133, 126, 111);
+  display: block;
+  transition: all 0.4s ease 0s;
   cursor: pointer;
+}
+.did-they-play:hover {
+  color: #ffffff;
+  background: #104703;
+  border-color: #104703;
+  transition: all 0.4s ease 0s;
 }
 
 .did-they-play:active {
