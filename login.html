@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>didtheyplay.soccer</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-title">
+        <img class="header-image" src="img/ball.png" />
+        <h1>didtheyplay.soccer?</h1>
+      </div>
+      <nav class="header-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="players.html">Players</a></li>
+          <li><a href="fixtures.html">Fixtures</a></li>
+          <li><a href="tables.html">Tables</a></li>
+          <li><a href="login.html" id="this">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <h2>Login</h2>
+        <form method = "post" action = "" autocomplete="on">
+            <p>
+               <label>Username:
+                      <input type = "text" autofocus required id="username" /> 
+                 Please enter your username.
+               </label>
+            </p>	
+
+            <p>
+                <label>Password:
+                       <input type = "password" required id="password" /> 
+                  Please enter your password.
+                </label>
+            </p>
+        
+            <p>
+               <label>Email:
+                      <input type = "email" placeholder = "email@domain.com" 
+                 required multiple id="email"/> Please enter your email address.
+               </label>
+            </p>
+        
+            <p>
+               <label>Telephone:
+                      <input type = "tel" placeholder = "(###) ###-####" 
+                 pattern = "\(\d{3}\) +\d{3}-\d{4}" required id="phone"/> 
+                 Please enter your phone number.
+               </label>
+            </p>
+        
+            <p>
+               <label>Please enter your birthdate:
+                      <input type = "date" placeholder = "mm/dd/yyyy" id="birthdate"/>     
+               </label>
+            </p>
+
+            <p>
+               <input type = "submit" value = "Submit" />
+               <input type = "reset" value = "Clear" />
+            </p>  
+
+         </form>
+      </section>
+    </main>
+  </body>
+</html>
