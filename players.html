@@ -6,19 +6,14 @@
     <title>didtheyplay.soccer</title>
     <link rel="stylesheet" href="css/style.css" />
     <script src="./node_modules/axios/dist/axios.min.js"></script>
-    
-    
-    
-     
-      
-     
   </head>
+
   <body>
     <header>
       <div class="header-title">
-      <img class="header-image" src="img/ball.png" />
-      <h1>didtheyplay.soccer?</h1>
-    </div>
+        <img class="header-image" src="img/ball.png" />
+        <h1>didtheyplay.soccer?</h1>
+      </div>
       <nav class="header-nav">
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -29,19 +24,22 @@
         </ul>
       </nav>
     </header>
-    <div>
-      <section class="main">
-      <h2>Players</h2>
-      
-          <div class="player-form-section">
-          <label for="player-name">Player Last Name:</label>
-          <input type="search" id="player-name" required>
+    <main>
+      <section class="title">
+        <h2>Players</h2>
+        <p>
+          Enter a player's last name to display their most recent statistics.
+        </p>
+      </section>
+      <section class="player-search-form">
+        <div class="player-form-section">
+          <label for="player-name">Name:</label>
+          <input type="search" id="player-name" pattern="/\s/g" required />
         </div>
         <div class="player-form-section">
-          <!-- <label for="league-name">League:</label> -->
+          <label for="league-name">League:</label>
           <select id="league-name" name="league-name" required>
-            
-            <option id="default">Select a competition...</option>
+            <option selected="selected" disabled="disabled"></option>
             <option value="2" id="champions">UEFA Champions League</option>
             <option value="3" id="europa">UEFA Europa League</option>
             <option value="39" id="england">England - Premier League</option>
@@ -52,12 +50,23 @@
           </select>
         </div>
         <div class="player-form-section">
+          <label for="season">Season:</label>
+          <select id="season" name="season" required>
+            <option value="2021" id="2021" selected="selected">
+              2021-2022
+            </option>
+            <option value="2020" id="2020">2020-2021</option>
+            <option value="2019" id="2019">2019-2020</option>
+          </select>
+        </div>
+        <div class="player-form-section">
           <button id="player-search-submit">Search</button>
         </div>
-      
-  </section>
+      </section>
+      <section class="players"></section>
+    </main>
 
-  <script src="getStats.js"></script>
+    <script src="js/getStats.js"></script>
+    <script src="js/savePlayer.js"></script>
   </body>
 </html>
-

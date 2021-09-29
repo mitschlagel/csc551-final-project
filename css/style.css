@@ -57,28 +57,117 @@ li > a:hover {
   color: rgb(133, 126, 111);
 }
 
-.main {
+main {
   display: flex;
   flex-direction: column;
-
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
-.hide {
-  display: none;
+.title {
+  text-align: center;
 }
 
-.player-form {
+.player-search-form {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
 }
 
 .player-form-section {
-  margin-bottom: 10px;
+  margin: 10px;
+}
+
+.player-profile {
+  margin-top: 20px;
+  background-color: rgba(133, 126, 111, 0.2);
+  padding: 20px;
+  border: 2px solid rgb(133, 126, 111);
+}
+
+.player-profile-body {
+  display: flex;
+  flex-direction: row;
+}
+
+.player-profile h2 {
+  padding: 0 0 0 20px;
+  margin: 0;
+}
+
+.player-profile ul {
+  margin-top: 0;
+  padding: 0;
+}
+.player-profile li {
+  display: block;
+}
+
+.name-photo {
+  padding: 20px;
   text-align: center;
 }
 
-.player-form-section:last-child {
+#player-photo {
+  border: 2px solid rgb(133, 126, 111);
+}
+
+.bio-info {
+  width: 200px;
+  padding: 20px;
+  line-height: 1.5rem;
+}
+
+.club-info {
   text-align: center;
+}
+
+#club-logo {
+  height: 100px;
+  padding: 20px 0;
+}
+
+.club-info ul:first-child {
+  font-size: 2rem;
+}
+
+.club-info li {
+  font-size: 1em;
+  margin: 0;
+  padding-bottom: 0.5rem;
+}
+.club-info > ul > li > img {
+  height: 1.2rem;
+  padding-right: 0.5rem;
+  vertical-align: bottom;
+}
+
+.did-they-play {
+  color: rgb(133, 126, 111);
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 2px solid rgb(133, 126, 111);
+  display: block;
+  transition: all 0.4s ease 0s;
+  cursor: pointer;
+}
+.did-they-play:hover {
+  color: #ffffff;
+  background: #104703;
+  border-color: #104703;
+  transition: all 0.4s ease 0s;
+}
+
+.did-they-play:active {
+  transform: scale(0.98);
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+.player-search-error {
+  padding: 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+  line-height: 2rem;
 }
