@@ -39,13 +39,50 @@
                 </label>
             </p>
 
-            <p>
-               <input type = "submit" value = "Submit" />
-               <input type = "reset" value = "Clear" />
-            </p>  
+          <p>
+            <label
+              >Email:
+              <input
+                type="email"
+                placeholder="email@domain.com"
+                required
+                multiple
+                id="email"
+              />
+            </label>
+          </p>
 
-         </form>
+          <p>
+            <label
+              >Telephone:
+              <input
+                type="tel"
+                placeholder="(###) ###-####"
+                pattern="\(\d{3}\) +\d{3}-\d{4}"
+                required
+                id="phone"
+              />
+            </label>
+          </p>
+
+          <p>
+            <label>Birthdate:
+              <input type="date" placeholder="mm/dd/yyyy" id="birthdate" />
+            </label>
+          </p>
+
+          <p>
+            <input type="submit" value="Submit" />
+            <input type="reset" value="Clear" />
+          </p>
+        </form>
       </section>
+      <footer>
+        <p>
+          All statistics provided by
+          <a href="http://www.api-football.org">api-football</a>.
+        </p>
+      </footer>
     </main>
   </body>
 </html>
