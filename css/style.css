@@ -225,3 +225,12 @@ input[type=reset] {
   border-style: solid;
   border-radius: 10px;
 }
+
+footer{
+  position:absolute;
+  bottom:0;
+}
+
+footer a{
+  text-align: center;
+}
