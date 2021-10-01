@@ -10,7 +10,7 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #104703;
+  background-color: #244f26;
   padding: 30px 0 20px 0;
 }
 
@@ -20,23 +20,25 @@ header {
 }
 
 .header-image {
-    width: 60px;
-    padding-right: 20px;
-    align-self: center;
-    position: relative;
-    animation: movingFootball linear 10s 2 1s alternate;
+  width: 60px;
+  padding-right: 20px;
+  align-self: center;
+  position: relative;
+  animation: movingFootball linear 10s infinite 1s alternate;
 }
 
 @keyframes movingFootball {
-    0% {
-        opacity: 0.5;
-        left: 0px;
-    }
+  0% {
+    opacity: 0.5;
+    left: 0px;
+    transform: rotate(0deg);
+  }
 
-    100% {
-        opacity: 0.5;
-        left: 600px;
-    }
+  100% {
+    opacity: 0.5;
+    left: 600px;
+    transform: rotate(1080deg);
+  }
 }
 
 header h1 {
@@ -57,10 +59,9 @@ nav li {
 li > a {
   color: white;
   text-decoration: none;
-  text-transform: lowercase;
-  font-weight: 700;
-  font-size: 1.5rem;
-  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  letter-spacing: 1px;
 }
 
 li > a:hover {
@@ -76,6 +77,8 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
+  padding-bottom: 2.5rem;
 }
 
 .title {
@@ -168,8 +171,8 @@ main {
 }
 .did-they-play:hover {
   color: #ffffff;
-  background: #104703;
-  border-color: #104703;
+  background: #244f26;
+  border-color: #244f26;
   transition: all 0.4s ease 0s;
 }
 
@@ -190,7 +193,11 @@ main {
   width: 400px;
 }
 
-input[type=text], input[type=password], input[type=email], input[type=tel], input[type=date] {
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="date"] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -199,8 +206,8 @@ input[type=text], input[type=password], input[type=email], input[type=tel], inpu
   box-sizing: border-box;
 }
 
-input[type=submit] {
-  background-color: #104703;
+input[type="submit"] {
+  background-color: #244f26;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -209,7 +216,7 @@ input[type=submit] {
   width: 100%;
 }
 
-input[type=reset] {
+input[type="reset"] {
   background-color: #f44336;
   color: white;
   padding: 14px 20px;
@@ -219,18 +226,31 @@ input[type=reset] {
   width: 100%;
 }
 
-.login-form, .register-form{
+.login-form,
+.register-form {
   margin-top: 10px;
   padding: 10px;
   border-style: solid;
   border-radius: 10px;
 }
 
-footer{
-  position:absolute;
-  bottom:0;
+footer {
+  position: absolute;
+  bottom: 0;
+  background-color: #244f26;
+  color: white;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
 }
 
-footer a{
-  text-align: center;
+/* I don't know why position absolute is not working on the register page so I used this hacky fix */
+.register-footer {
+  position: initial;
+  padding: 20px;
+}
+
+footer a {
+  color: rgb(133, 126, 111);
 }

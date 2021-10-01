@@ -29,31 +29,33 @@
       <section class="title"><h2>Tables</h2></section>
 
       <section class="table-select">
-        <form>
-          <label for="league">Choose a league:</label>
-          <select id="league" name="league">
-            <option value="champions">UEFA Champions League</option>
-            <option value="europa">UEFA Europa League</option>
-            <option value="england">England - Premier League</option>
-            <option value="germany">Germany - Bundesliga</option>
-            <option value="spain">Spain - La Liga</option>
-            <option value="france">France - Ligue 1</option>
-            <option value="italy">Italy - Serie A</option>
-          </select>
-        </form>
+        <label for="league">Choose a league:</label>
+        <select id="league" name="league">
+          <option selected="selected" disabled="disabled"></option>
+          <option value="2" id="champions">UEFA Champions League</option>
+          <option value="3" id="europa">UEFA Europa League</option>
+          <option value="39" id="england">England - Premier League</option>
+          <option value="78" id="germany">Germany - Bundesliga</option>
+          <option value="140" id="spain">Spain - La Liga</option>
+          <option value="61" id="france">France - Ligue 1</option>
+          <option value="135" id="italy">Italy - Serie A</option>
+        </select>
+        <button id="table-select-button">Go</button>
       </section>
       <section class="table-main"></section>
-      <footer>
-        <p>
-          All statistics provided by
-          <a href="http://www.api-football.org">api-football</a>.
-        </p>
-      </footer>
-      <script src="js/tables.js"></script>
-      <script
-        type="module"
-        src="https://widgets.api-sports.io/football/1.1.8/widget.js"
-      ></script>
     </main>
+    <footer>
+      <div>
+        All statistics provided by
+        <a href="http://www.api-football.org">api-football</a>.
+      </div>
+      <div>
+        Some icons made by
+        <a href="https://www.freepik.com" title="Freepik">Freepik</a> from
+        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a
+        >.
+      </div>
+    </footer>
+    <script src="js/tables.js"></script>
   </body>
 </html>
