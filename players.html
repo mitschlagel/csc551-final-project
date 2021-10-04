@@ -13,6 +13,11 @@
       <div class="header-title">
         <img class="header-image" src="img/ball.png" />
         <h1>didtheyplay.soccer?</h1>
+          <!-- THESE ARE FOR THE LOGIN AND REGISTER BUTTONS -->
+          <div class="login-register-buttons">
+            <button onclick="document.getElementById('login-form').style.display='block'" style="width:auto;">Login</button>
+            <button onclick="document.getElementById('register-form').style.display='block'" style="width:auto;">Register</button>
+          </div>
       </div>
       <nav class="header-nav">
         <ul>
@@ -20,8 +25,6 @@
           <li><a href="players.html" id="this">Players</a></li>
           <li><a href="fixtures.html">Fixtures</a></li>
           <li><a href="tables.html">Tables</a></li>
-          <li><a href="login.html">Login</a></li>
-          <li><a href="register.html">Register</a></li>
         </ul>
       </nav>
     </header>
@@ -65,7 +68,63 @@
         </div>
       </section>
       <section class="players"></section>
-    
+      <!-- THESE ARE FOR THE LOGIN AND REGISTER BUTTONS -->
+      <section class="login-and-register">
+        <div id="login-form" class="login-window">
+          <form class="login-window-box animate" action="" method="post">
+            <div class="close-x-div">
+              <span onclick="document.getElementById('login-form').style.display='none'" class="close">&times;</span>
+            </div>
+  
+            <div class="login-info">
+              <label for="username"><b>Username</b></label>
+              <input type="text" placeholder="Enter Username" name="username" required>
+        
+              <label for="password"><b>Password</b></label>
+              <input type="password" placeholder="Enter Password" name="password" required>
+                
+              <button type ="submit">Login</button>
+              <button type ="reset" class="clearButton">Clear</button>
+            </div>
+        
+            <div class="container" style="background-color:#f1f1f1">
+              <span>Are you not <a href="register.html">registered?</a></span>
+            </div>
+          </form>
+        </div>
+  
+        <div id="register-form" class="register-window">
+          <form class="register-window-box animate" action="" method="post">
+            <div class="close-x-div">
+              <span onclick="document.getElementById('register-form').style.display='none'" class="close">&times;</span>
+            </div>
+  
+            <div class="register-info">
+              <label for="username"><b>Username</b></label>
+              <input type="text" placeholder="Enter Username" name="username" required>
+        
+              <label for="password"><b>Password</b></label>
+              <input type="password" placeholder="Enter Password" name="password" required>
+  
+              <label for="email"><b>E-Mail</b></label>
+              <input type="email" placeholder="email@domain.com" name="email" required>
+  
+              <label for="phone"><b>Telephone</b></label>
+              <input type="tel" placeholder="(###) ###-####" name="password" pattern = "\(\d{3}\) +\d{3}-\d{4}" required>
+         
+              <label for="birthdate"><b>Date of Birth</b></label>
+              <input type = "date" placeholder = "mm/dd/yyyy" name="birthdate" required>
+                
+              <button type ="submit">Register</button>
+              <button type ="reset" class="clearButton">Clear</button>
+            </div>
+        
+            <div class="container" style="background-color:#f1f1f1">
+              <span>Are you already <a href="login.html">registered?</a></span>
+            </div>
+          </form>
+        </div>
+      </section>
       <footer>
         <p>
           All statistics provided by
