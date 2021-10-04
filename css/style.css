@@ -228,11 +228,11 @@ input[type=reset] {
 
 /* All buttons */
 button {
-  background-color: #04AA6D;
+  background-color: #104703;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
-  border: none;
+  border: solid;
   cursor: pointer;
   width: 100%;
 }
