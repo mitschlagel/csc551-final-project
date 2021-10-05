@@ -24,4 +24,9 @@ requires the season and league param to search for a player name
 api-football has an endpoint for stats from the last match ---
 [https://v3.football.api-sports.io/fixtures/players](https://v3.football.api-sports.io/fixtures/players)
 
-if we can get the last match for the player's club, we can hit that endpoint and display those stats
+we have to get the team ID for the player, then send request to /fixtures endpoint to get the last fixture id, then send fixture id and team id to fixtures/players, and parse that JSON response for the data for the specific player we are searching for.... oh my.
+
+## ideas
+
+can we store fav players in localStorage?
+use localStorage/seesionStorage to track if user is logged in
