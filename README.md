@@ -28,5 +28,5 @@ we have to get the team ID for the player, then send request to /fixtures endpoi
 
 ## ideas
 
-can we store fav players in localStorage?
+can we store fav players in localStorage? save the minutes played for fav players in local storage!!!!
 use localStorage/seesionStorage to track if user is logged in
