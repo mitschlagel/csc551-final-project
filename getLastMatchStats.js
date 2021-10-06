@@ -54,7 +54,7 @@ const processFixture = (fixtureID, teamID, playerID, playerQuery) => {
     .get(url, { headers: config, params: params })
     .then(({ data }) => {
       const responseObject = data.response[0];
-      const playerInRoster = false;
+      let playerInRoster = false;
       responseObject.players.forEach(({ player, statistics }) => {
         if (player.id == playerID) {
           playerInRoster = true;
