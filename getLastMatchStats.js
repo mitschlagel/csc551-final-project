@@ -7,7 +7,7 @@ const config = { "x-apisports-key": "569fd3056fbfd09a47a568e3b82163f7" };
 // change these here to play around and search for different players.
 // league ids are listed in the readme
 const playerQuery = {
-  player: "werner",
+  player: "pulisic",
   league: "39",
   season: "2021",
 };
@@ -20,9 +20,8 @@ const getPlayer = ({ player, league, season }) => {
     .then((response) => {
       const playerID = response.data.response[0].player.id;
       const teamID = response.data.response[0].statistics[0].team.id;
-      console.log(teamID);
-
-      processPlayer(teamID, playerID);
+      const playerQuery = response.data.response[0].player.name;
+      processPlayer(teamID, playerID, playerQuery);
     })
     .catch((error) => {
       console.log(error);
@@ -31,14 +30,15 @@ const getPlayer = ({ player, league, season }) => {
 
 // get team id for the player, send request to /fixtures with params {team: teamID, last: 1}. receive fixture ID
 
-const processPlayer = (teamID, playerID) => {
+const processPlayer = (teamID, playerID, playerQuery) => {
   const url = "https://v3.football.api-sports.io/fixtures";
   const params = { team: teamID, season: "2021", last: "1" };
   axios
     .get(url, { headers: config, params: params })
     .then(({ data }) => {
       const fixtureID = data.response[0].fixture.id;
-      processFixture(fixtureID, teamID, playerID);
+
+      processFixture(fixtureID, teamID, playerID, playerQuery);
     })
     .catch((error) => {
       console.log(error);
@@ -47,20 +47,25 @@ const processPlayer = (teamID, playerID) => {
 
 // send request to /fixtures/players with param {fixture: fixtureID, team: teamID}
 // parse that response for stats for that player for most recent match
-const processFixture = (fixtureID, teamID, playerID) => {
+const processFixture = (fixtureID, teamID, playerID, playerQuery) => {
   const url = "http://v3.football.api-sports.io/fixtures/players";
   const params = { fixture: fixtureID, team: teamID };
   axios
     .get(url, { headers: config, params: params })
     .then(({ data }) => {
       const responseObject = data.response[0];
+      const playerInRoster = false;
       responseObject.players.forEach(({ player, statistics }) => {
         if (player.id == playerID) {
+          playerInRoster = true;
           const stats = statistics[0];
           console.log(player.name);
           console.log(stats);
         }
       });
+      if (!playerInRoster) {
+        console.log(`${playerQuery} was not in the game day squad.`);
+      }
     })
 
     .catch((error) => {
