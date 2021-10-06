@@ -7,8 +7,8 @@ const config = { "x-apisports-key": "569fd3056fbfd09a47a568e3b82163f7" };
 // change these here to play around and search for different players.
 // league ids are listed in the readme
 const playerQuery = {
-  player: "pulisic",
-  league: "39",
+  player: "adams",
+  league: "78",
   season: "2021",
 };
 
@@ -17,11 +17,11 @@ const getPlayer = ({ player, league, season }) => {
   const params = { search: player, league: league, season: season };
   axios
     .get(url, { headers: config, params: params })
-    .then((response) => {
-      const playerID = response.data.response[0].player.id;
-      const teamID = response.data.response[0].statistics[0].team.id;
-      const playerQuery = response.data.response[0].player.name;
-      processPlayer(teamID, playerID, playerQuery);
+    .then(({ data }) => {
+      const playerID = data.response[0].player.id;
+      const teamID = data.response[0].statistics[0].team.id;
+      const playerQuery = data.response[0].player.name;
+      getFixture(teamID, playerID, playerQuery);
     })
     .catch((error) => {
       console.log(error);
@@ -30,7 +30,7 @@ const getPlayer = ({ player, league, season }) => {
 
 // get team id for the player, send request to /fixtures with params {team: teamID, last: 1}. receive fixture ID
 
-const processPlayer = (teamID, playerID, playerQuery) => {
+const getFixture = (teamID, playerID, playerQuery) => {
   const url = "https://v3.football.api-sports.io/fixtures";
   const params = { team: teamID, season: "2021", last: "1" };
   axios
