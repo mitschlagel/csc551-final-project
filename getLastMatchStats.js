@@ -7,8 +7,8 @@ const config = { "x-apisports-key": "569fd3056fbfd09a47a568e3b82163f7" };
 // change these here to play around and search for different players.
 // league ids are listed in the readme
 const playerQuery = {
-  player: "adams",
-  league: "78",
+  player: "mckennie",
+  league: "135",
   season: "2021",
 };
 
@@ -37,8 +37,8 @@ const getFixture = (teamID, playerID, playerQuery) => {
     .get(url, { headers: config, params: params })
     .then(({ data }) => {
       const fixtureID = data.response[0].fixture.id;
-
-      processFixture(fixtureID, teamID, playerID, playerQuery);
+      const matchInfo = data.response[0];
+      processFixture(fixtureID, teamID, playerID, playerQuery, matchInfo);
     })
     .catch((error) => {
       console.log(error);
@@ -47,7 +47,13 @@ const getFixture = (teamID, playerID, playerQuery) => {
 
 // send request to /fixtures/players with param {fixture: fixtureID, team: teamID}
 // parse that response for stats for that player for most recent match
-const processFixture = (fixtureID, teamID, playerID, playerQuery) => {
+const processFixture = (
+  fixtureID,
+  teamID,
+  playerID,
+  playerQuery,
+  matchInfo
+) => {
   const url = "http://v3.football.api-sports.io/fixtures/players";
   const params = { fixture: fixtureID, team: teamID };
   axios
@@ -60,6 +66,9 @@ const processFixture = (fixtureID, teamID, playerID, playerQuery) => {
           playerInRoster = true;
           const stats = statistics[0];
           console.log(player.name);
+          console.log(
+            `${matchInfo.teams.home.name} ${matchInfo.goals.home} | ${matchInfo.goals.away} ${matchInfo.teams.away.name}`
+          );
           console.log(stats);
         }
       });
