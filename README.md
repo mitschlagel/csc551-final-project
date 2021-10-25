@@ -30,3 +30,30 @@ we have to get the team ID for the player, then send request to /fixtures endpoi
 
 can we store fav players in localStorage? save the minutes played for fav players in local storage!!!!
 use localStorage/seesionStorage to track if user is logged in
+
+## table schema
+
+Table: User Info
+
+- user id number (primary key)
+- user name
+- password
+- first name
+- last name
+- email
+- country
+
+Table: User Favorite Players
+
+- user id number (primary key)
+- player ids
+
+Table: User Favorite Leagues
+
+- user id number (primary key)
+- league ids
+
+Table: User Favorite Teams
+
+- user id number(primary key)
+- team ids

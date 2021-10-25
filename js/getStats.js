@@ -30,10 +30,10 @@ const getStats = () => {
     });
 };
 
-const displayStats = (stats) => {
+const displayStats = (statistics) => {
   const searchResults = document.querySelector(".players");
   searchResults.innerHTML = "";
-  stats.forEach((element) => {
+  statistics.forEach((element) => {
     const playerProfile = document.createElement("section");
     playerProfile.classList.add("player-profile");
 
