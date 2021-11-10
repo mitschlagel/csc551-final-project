@@ -27,12 +27,15 @@ $email=$_POST['email'];
 $phone=$_POST['phone'];
 $birthdate=$_POST['birthdate'];
  
-$dbConnection=mysqli_connect("sql304.epizy.com","epiz_29507824","TKiNcSS1UvTF9V", "epiz_29507824_soccer");
+include("connectToDB.inc");
+$dataBase = connectDB();
 $q1='INSERT INTO users VALUES("';
 $q2='","';
 $q3='");';
 $query=$q1.$username.$q2.$password.$q2.$email.$q2.$phone.$q2.$birthdate.$q3;
-$result=mysqli_query($dbConnection,$query) or die('Query failed: '.mysqli_error($dbConnection))
+$result=mysqli_query($dataBase,$query) or die('Query failed: '.mysqli_error($dataBase));
+
+mysql_close($dataBase);
 ?>
 </p>
 
