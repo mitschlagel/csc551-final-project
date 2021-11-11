@@ -1,3 +1,10 @@
+<?php 
+    define("DAY",60*60*24);
+
+    setcookie("userLog",$_POST["username"],time()+DAY);
+    setcookie("passwordLog",$_POST["password"],time()+DAY); 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,7 +32,7 @@
           <li><a href="../players.html">Players</a></li>
           <li><a href="../fixtures.html">Fixtures</a></li>
           <li><a href="../tables.html">Tables</a></li>
-          <li><a href="" id="this">User</a></li>
+          <li><a href="user.php" id="this">User</a></li>
         </ul>
       </nav>
     </header>
@@ -33,19 +40,15 @@
       <section>
       
         <?php 
-        $user=$_POST['username'];
-        $pass=$_POST['password'];
+        //$user=$_POST['username'];
+        //$pass=$_POST['password'];
 
         include("connectToDB.inc");
         $dataBase = connectDB();
         $query='SELECT * FROM users;';
         $result=mysqli_query($dataBase,$query) or die('Query failed: '.mysqli_error($dataBase));
         $loggedIn=false;
-        $intro=true;
         
-        if($user==""){
-            $intro=false;
-        }
 
         $u="";$e="";$p="";$b="";
 
@@ -53,7 +56,7 @@
         {
         extract($row);
 
-            if($Username==$user && $Password==$pass){
+            if($Username==$_COOKIE['userLog'] && $Password==$_COOKIE['passwordLog']){
                 $u=$Username;
                 $e=$Email;
                 $p=$Phone;
@@ -63,10 +66,8 @@
             
         }
 
-        if($loggedIn==false && $intro==true){
+        if($loggedIn==false){
             echo "<p> The email or password are incorrect </p>";
-        }else if ($loggedIn==false && $intro==false){
-            echo "<p>Please login first</p>";
         }else{
             echo    "<h2 style='text-align: center'> 
                         Welcome $u

@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>didtheyplay.soccer</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
     <header>
       <div class="header-title">
-        <img class="header-image" src="img/ball.png" />
+        <img class="header-image" src="../img/ball.png" />
         <h1>didtheyplay.soccer?</h1>
         
         <!-- THESE ARE FOR THE LOGIN AND REGISTER BUTTONS -->
@@ -21,42 +21,41 @@
       </div>
       <nav class="header-nav">
         <ul>
-          <li><a href="index.html" id="this">Home</a></li>
-          <li><a href="players.html">Players</a></li>
-          <li><a href="fixtures.html">Fixtures</a></li>
-          <li><a href="tables.html">Tables</a></li>
-          <li><a href="php/user.php">User</a></li>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../players.html">Players</a></li>
+          <li><a href="../fixtures.html">Fixtures</a></li>
+          <li><a href="../tables.html">Tables</a></li>
+          <li><a href="" id="this">User</a></li>
         </ul>
       </nav>
     </header>
     <main>
       <section>
-        <h2 style="text-align: center">Home</h2>
-        <p style="text-align: center">
-          Welcome to our project. We are bringing you an easy way to keep up
-          with your favorite players.<br />
-          Just go to the players tab and start looking for the player you want,
-          with just his name and the competition he plays in.
-        </p>
-        <div>
-          <img
-            class="player-example"
-            src="img/fekir.png"
-            alt="Example of a player search, with data from a player called Nabil Fekir"
-            style="float: left"
-          />
-          <p style="padding: 80px 0; text-align: center">
-            This is an example of what a player search would look like,<br />
-            with all the information about that players, including his profile
-            photo, and the team and league he plays for, and his stats.
-          </p>
-        </div>
+      
+        <?php 
+
+        $loggedIn=false;
+        $u=$_COOKIE['userLog'];
+        if(isset($u)){
+            $loggedIn=true;
+        }
+
+        if($loggedIn==false){
+            echo "<p> The email or password are incorrect </p>";
+        }else{
+            echo    "<h2 style='text-align: center'> 
+                        Welcome $u
+                    </h2>";
+        }        
+
+        ?>
+
       </section>
 
       <!-- THESE ARE FOR THE LOGIN AND REGISTER BUTTONS -->
       <section class="login-and-register">
         <div id="login-form" class="login-window">
-          <form class="login-window-box animate" action="php/login.php" method="post">
+          <form class="login-window-box animate" action="login.php" method="post">
             <div class="close-x-div">
               <span onclick="document.getElementById('login-form').style.display='none'" class="close">&times;</span>
             </div>
@@ -79,7 +78,7 @@
         </div>
   
         <div id="register-form" class="register-window">
-          <form class="register-window-box animate" action="php/register.php" method="post">
+          <form class="register-window-box animate" action="register.php" method="post">
             <div class="close-x-div">
               <span onclick="document.getElementById('register-form').style.display='none'" class="close">&times;</span>
             </div>

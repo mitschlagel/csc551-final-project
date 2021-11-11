@@ -25,7 +25,7 @@
           <li><a href="../players.html">Players</a></li>
           <li><a href="../fixtures.html">Fixtures</a></li>
           <li><a href="../tables.html">Tables</a></li>
-          <li><a href="" id="this">User</a></li>
+          <li><a href="user.php" id="this">User</a></li>
         </ul>
       </nav>
     </header>
