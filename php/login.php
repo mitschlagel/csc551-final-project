@@ -2,7 +2,6 @@
     define("DAY",60*60*24);
 
     setcookie("userLog",$_POST["username"],time()+DAY);
-    setcookie("passwordLog",$_POST["password"],time()+DAY); 
 ?>
 
 <!DOCTYPE html>
