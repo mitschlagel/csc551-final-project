@@ -21,6 +21,17 @@
       tr:nth-child(even) {
         background-color: #dddddd;
       }
+
+      .button {
+        background-color: #f44336;
+        color: white;
+        padding: 7px 10px;
+        margin: 8px 0;
+        border: solid;
+        cursor: pointer;
+        width: 100%;
+        text-decoration: none;
+      }
     </style>
   </head>
   <body>
@@ -89,7 +100,7 @@
                         <td>$Appearances</td>
                         <td>$Goals</td>
                         <td>$Assists</td>
-                        <td><a href='delete.php?id=$PlayerId'>Delete</a></td>
+                        <td><a href='delete.php?id=$PlayerId' class='button'>Delete</a></td>
                       </tr>";
               } 
               
