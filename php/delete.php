@@ -5,23 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>didtheyplay.soccer</title>
     <link rel="stylesheet" href="../css/style.css" />
-    <style>
-      table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-      }
-
-      td, th {
-        border: 1px solid #dddddd;
-        text-align: center;
-        padding: 8px;
-      }
-
-      tr:nth-child(even) {
-        background-color: #dddddd;
-      }
-    </style>
   </head>
   <body>
     <header>
@@ -42,67 +25,32 @@
           <li><a href="../players.html">Players</a></li>
           <li><a href="../fixtures.html">Fixtures</a></li>
           <li><a href="../tables.html">Tables</a></li>
-          <li><a href="" id="this">User</a></li>
+          <li><a href="user.php" id="this">User</a></li>
         </ul>
       </nav>
     </header>
     <main>
-      <section>
+        <section>
       
-        <?php 
+        <?php
 
-        $loggedIn=false;
-        $u=$_COOKIE['userLog'];
-        if(isset($u)){
-            $loggedIn=true;
-        }
+            $playerSelected=$_COOKIE['selectedPlayer'];
+            $playerSel=$_GET['id'];
+            function deletePlayer($playerNumber) {
+                include("connectToDB.inc");
+                $dataBase = connectDB();
+                $qy1=$_COOKIE['userLog'];
+                $query='DELETE FROM follow WHERE username="'.$qy1.'" AND PlayerId="'.$playerNumber.'";';
+                $result=mysqli_query($dataBase,$query) or die('Query failed: '.mysqli_error($dataBase));
+                mysql_close($dataBase);
+            }
 
-        if($loggedIn==false){
-            echo "<p> The email or password are incorrect </p>";
-        }else{
-          include("connectToDB.inc");
-          $dataBase = connectDB();
-          $query='SELECT * FROM follow JOIN player on follow.playerId=player.playerId;';
-          $result=mysqli_query($dataBase,$query) or die('Query failed: '.mysqli_error($dataBase));
-         
-          echo "<h3 align='center'>Welcome $u</br></h3>";
+            deletePlayer($playerSel);
 
-          echo  "<table>
-                  <tr>
-                    <th>Player Name</th>
-                    <th>Appearances</th>
-                    <th>Goals</th>
-                    <th>Assists</th>
-                    <th>Delete Option</th>
-                  </tr>";
-
-          while ($row = mysqli_fetch_array($result, MYSQL_ASSOC))
-          {
-          extract($row);
-
-              if($Username==$_COOKIE['userLog']){
-                define("DAY",60*60*24);
-                setcookie("selectedPlayer",$PlayerId,time()+DAY);
-
-                echo  "<tr>
-                        <td>$FirstName $LastName</td>
-                        <td>$Appearances</td>
-                        <td>$Goals</td>
-                        <td>$Assists</td>
-                        <td><a href='delete.php?id=$PlayerId'>Delete</a></td>
-                      </tr>";
-              } 
-              
-          }
-          echo "</table>";
-
-          mysql_close($dataBase);
-
-        }        
+            echo "The player has been correctly deleted";
 
         ?>
-
-      </section>
+        </section>
 
       <!-- THESE ARE FOR THE LOGIN AND REGISTER BUTTONS -->
       <section class="login-and-register">
