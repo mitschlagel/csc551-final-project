@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>didtheyplay.soccer</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: center;
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -43,9 +60,39 @@
         if($loggedIn==false){
             echo "<p> The email or password are incorrect </p>";
         }else{
-            echo    "<h2 style='text-align: center'> 
-                        Welcome $u
-                    </h2>";
+          include("connectToDB.inc");
+          $dataBase = connectDB();
+          $query='SELECT * FROM follow JOIN player on follow.playerId=player.playerId;';
+          $result=mysqli_query($dataBase,$query) or die('Query failed: '.mysqli_error($dataBase));
+         
+          echo "<h3 align='center'>Welcome $u</br></h3>";
+
+          echo  "<table>
+                  <tr>
+                    <th>Player Name</th>
+                    <th>Appearances</th>
+                    <th>Goals</th>
+                    <th>Assists</th>
+                  </tr>";
+
+          while ($row = mysqli_fetch_array($result, MYSQL_ASSOC))
+          {
+          extract($row);
+
+              if($Username==$_COOKIE['userLog']){
+                echo  "<tr>
+                        <td>$FirstName $LastName</td>
+                        <td>$Appearances</td>
+                        <td>$Goals</td>
+                        <td>$Assists</td>
+                      </tr>";
+              } 
+              
+          }
+          echo "</table>";
+
+          mysql_close($dataBase);
+
         }        
 
         ?>
