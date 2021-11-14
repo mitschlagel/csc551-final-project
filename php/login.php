@@ -31,7 +31,7 @@
           <li><a href="../players.html">Players</a></li>
           <li><a href="../fixtures.html">Fixtures</a></li>
           <li><a href="../tables.html">Tables</a></li>
-          <li><a href="user.php" id="this">User</a></li>
+          <li><a href="user.php">User</a></li>
         </ul>
       </nav>
     </header>
@@ -39,8 +39,8 @@
       <section>
       
         <?php 
-        //$user=$_POST['username'];
-        //$pass=$_POST['password'];
+        $user=$_POST['username'];
+        $pass=$_POST['password'];
 
         include("connectToDB.inc");
         $dataBase = connectDB();
@@ -55,7 +55,7 @@
         {
         extract($row);
 
-            if($Username==$_COOKIE['userLog'] && $Password==$_COOKIE['passwordLog']){
+            if($Username==$user && $Password==$pass){
                 $u=$Username;
                 $e=$Email;
                 $p=$Phone;
@@ -73,10 +73,7 @@
                     </h2>";
         
             echo    "<p style='text-align: center'>
-                        This is your data: </br>
-                        Email: $e </br>
-                        Phone: $p </br>
-                        BirthDate: $b </br>
+                        You are now logged-in.
                     </p>";
         }        
 
