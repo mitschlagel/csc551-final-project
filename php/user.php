@@ -99,7 +99,7 @@
           <li><a href="" id="this">User</a></li>
           <?php
             if(getUserAdmin()){
-              echo '<li><a href="admin.php" id="this">Admin</a></li>';
+              echo '<li><a href="admin.php">Admin</a></li>';
             }
           ?>
         </ul>

@@ -104,7 +104,7 @@
             $resultUsers = mysqli_query($dataBase, $queryUsers) or die('Query failed: '.mysqli_error($dataBase));
             echo "<br>All User Records:<br>";
             echo "<table>";
-            echo "<tr> <td>Username</td> <td>Password</td> <td>Email</td> <td>Phone</td> <td>BirthDate</td></tr>";
+            echo "<tr> <th>Username</th> <th>Password</th> <th>Email</th> <th>Phone</th> <th>BirthDate</th></tr>";
             while ($lineUsers = mysqli_fetch_array($resultUsers, MYSQL_ASSOC)) {extract($lineUsers);
               echo "<tr> <td>$Username</td> <td>$Password</td>  <td>$Email</td> <td>$Phone</td> <td>$BirthDate</td></tr>";
             }
@@ -114,7 +114,7 @@
             $resultPlayers = mysqli_query($dataBase, $queryPlayers) or die('Query failed: '.mysqli_error($dataBase));
             echo "<br>All Player Records:<br>";
             echo "<table>";
-            echo "<tr> <td>PlayerId</td> <td>First Name</td> <td>Last Name</td></tr>";
+            echo "<tr> <th>PlayerId</th> <th>First Name</th> <th>Last Name</th></tr>";
             while ($linePlayers = mysqli_fetch_array($resultPlayers, MYSQL_ASSOC)) {extract($linePlayers);
               echo "<tr> <td>$PlayerId</td>  <td>$FirstName</td> <td>$LastName</td></tr>";
             }
@@ -124,7 +124,7 @@
             $resultFollow = mysqli_query($dataBase, $queryFollow) or die('Query failed: '.mysqli_error($dataBase));
             echo "<br>All Following Records:<br>";
             echo "<table>";
-            echo "<tr> <td>Username</td> <td>PlayerId</td> <td>Appearances</td> <td>Minutes</td> <td>Goals</td> <td>Assists</td></tr>";
+            echo "<tr> <th>Username</th> <th>PlayerId</th> <th>Appearances</th> <th>Minutes</th> <th>Goals</th> <th>Assists</th></tr>";
             while ($lineFollow = mysqli_fetch_array($resultFollow, MYSQL_ASSOC)) {extract($lineFollow);
               echo "<tr> <td>$Username</td> <td>$PlayerId</td> <td>$Appearances</td> <td>$Minutes</td> <td>$Goals</td> <td>$Assists</td></tr>";
             }
