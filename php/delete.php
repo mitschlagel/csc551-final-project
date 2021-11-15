@@ -45,9 +45,26 @@
                 mysql_close($dataBase);
             }
 
+            function showDeletedPlayer($playerNumber) {
+              $fn="";$ln="";
+              $dataBase = connectDB();
+              $query2='SELECT * FROM player WHERE PlayerId='.$playerNumber.';';
+              $result2=mysqli_query($dataBase,$query2) or die('Query failed: '.mysqli_error($dataBase));
+              while ($row = mysqli_fetch_array($result2, MYSQL_ASSOC))
+              {
+                extract($row);
+                $fn=$FirstName;
+                $ln=$LastName;
+              }
+              echo "The player $fn $ln has been correctly deleted";
+              mysql_close($dataBase);
+            }
+
             deletePlayer($playerSel);
 
-            echo "The player has been correctly deleted";
+            showDeletedPlayer($playerSel);
+
+            
 
         ?>
         </section>

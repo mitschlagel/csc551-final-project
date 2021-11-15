@@ -82,6 +82,7 @@
                   <tr>
                     <th>Player Name</th>
                     <th>Appearances</th>
+                    <th>Minutes</th>
                     <th>Goals</th>
                     <th>Assists</th>
                     <th>Delete Option</th>
@@ -98,6 +99,7 @@
                 echo  "<tr>
                         <td>$FirstName $LastName</td>
                         <td>$Appearances</td>
+                        <td>$Minutes</td>
                         <td>$Goals</td>
                         <td>$Assists</td>
                         <td><a href='delete.php?id=$PlayerId' class='button'>Delete</a></td>
