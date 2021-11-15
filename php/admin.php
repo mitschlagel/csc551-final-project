@@ -23,7 +23,7 @@
     <title>didtheyplay.soccer</title>
     <link rel="stylesheet" href="../css/style.css" />
 	<style>
-		.login-register-buttons{
+		  .login-register-buttons{
         <?php
           if(isset($_COOKIE['userLog'])){
             echo "display:none;";
@@ -57,6 +57,13 @@
 
       tr:nth-child(even) {
         background-color: #dddddd;
+      }
+
+      input[type="text"]{
+        width: 20%;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
       }
 	</style>
   </head>
@@ -102,7 +109,7 @@
           
             $queryUsers  = 'SELECT * FROM users ORDER BY username';
             $resultUsers = mysqli_query($dataBase, $queryUsers) or die('Query failed: '.mysqli_error($dataBase));
-            echo "<br>All User Records:<br>";
+            echo "<br>All <i>users</i> Records:<br>";
             echo "<table>";
             echo "<tr> <th>Username</th> <th>Password</th> <th>Email</th> <th>Phone</th> <th>BirthDate</th></tr>";
             while ($lineUsers = mysqli_fetch_array($resultUsers, MYSQL_ASSOC)) {extract($lineUsers);
@@ -112,7 +119,7 @@
 
             $queryPlayers  = 'SELECT * FROM player ORDER BY PlayerId';
             $resultPlayers = mysqli_query($dataBase, $queryPlayers) or die('Query failed: '.mysqli_error($dataBase));
-            echo "<br>All Player Records:<br>";
+            echo "<br>All <i>player</i> Records:<br>";
             echo "<table>";
             echo "<tr> <th>PlayerId</th> <th>First Name</th> <th>Last Name</th></tr>";
             while ($linePlayers = mysqli_fetch_array($resultPlayers, MYSQL_ASSOC)) {extract($linePlayers);
@@ -122,7 +129,7 @@
 
             $queryFollow  = 'SELECT * FROM follow ORDER BY Username, PlayerId';
             $resultFollow = mysqli_query($dataBase, $queryFollow) or die('Query failed: '.mysqli_error($dataBase));
-            echo "<br>All Following Records:<br>";
+            echo "<br>All <i>follow</i> Records:<br>";
             echo "<table>";
             echo "<tr> <th>Username</th> <th>PlayerId</th> <th>Appearances</th> <th>Minutes</th> <th>Goals</th> <th>Assists</th></tr>";
             while ($lineFollow = mysqli_fetch_array($resultFollow, MYSQL_ASSOC)) {extract($lineFollow);
@@ -134,11 +141,60 @@
           
           }
 
+          function deleteRecords() {
+            $dataBase = connectDB();
+            $q1='DELETE FROM ';
+            $q2=' WHERE ';
+            $query=$q1.$_POST['tableName1'].$q2.$_POST['attributeName1'].'='.$_POST['attributeValue1'];
+            $result=mysqli_query($dataBase,$query) or die('Query failed: '.mysqli_error($dataBase));
+            mysql_close($dataBase);
+          }
+          function updateRecords() {
+            $dataBase = connectDB();
+            $q1='UPDATE ';
+            $q2=' SET ';
+            $q3=' WHERE ';
+            $query=$q1.$_POST['tableName2'].$q2.$_POST['attributeName2'].'='.$_POST['attributeValue2'].$q3.$_POST['attributeName3'].'='.$_POST['attributeValue3'];
+            $result=mysqli_query($dataBase,$query) or die('Query failed: '.mysqli_error($dataBase));
+            mysql_close($dataBase);
+          }
+
           if(getUserAdmin()){
-            showAllData();
+            if (isset($_POST['tableName1']) && isset($_POST['attributeName1']) && isset($_POST['attributeValue1'])) {
+              deleteRecords();
+              showAllData();
+            } else if (isset($_POST['tableName2']) && isset($_POST['attributeName2']) && isset($_POST['attributeValue2']) && isset($_POST['attributeName3']) && isset($_POST['attributeValue3'])) {
+              updateRecords();
+              showAllData();
+            } else {
+              showAllData();
+            }
           }else{
             echo "<p>You are not an admin</p>";
           }
+
+          
+
+          echo <<<END
+            <h2>Below you can DELETE records from the tables above</h2>
+            <form action="$_SERVER[PHP_SELF]" method="post">
+              <p>DELETE FROM <input type="text" name="tableName1" value=""> </p>
+              <p>WHERE <input type="text" name="attributeName1" value="">  = <input type="text" name="attributeValue1" value=""> </p>
+              <input type='submit' value='Submit'>
+            </form>
+          END
+          ;
+
+          echo <<<END
+            <h2>Below you can UPDATE records in the tables above</h2>
+            <form action="$_SERVER[PHP_SELF]" method="post">
+              <p>UPDATE <input type="text" name="tableName2" value=""> </p>
+              <p>SET <input type="text" name="attributeName2" value=""> = <input type="text" name="attributeValue2" value=""> </p>
+              <p>WHERE <input type="text" name="attributeName3" value=""> = <input type="text" name="attributeValue3" value=""> </p>
+              <input type='submit' value='Submit'>
+            </form>
+          END
+          ;
           
         ?>
         </section>
