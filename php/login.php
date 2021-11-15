@@ -11,6 +11,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>didtheyplay.soccer</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: center;
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+
+      .button {
+        background-color: #f44336;
+        color: white;
+        padding: 7px 10px;
+        margin: 8px 0;
+        border: solid;
+        cursor: pointer;
+        width: 100%;
+        text-decoration: none;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -22,6 +50,10 @@
         <div class="login-register-buttons">
           <button onclick="document.getElementById('login-form').style.display='block'" style="width:auto;">Login</button>
           <button onclick="document.getElementById('register-form').style.display='block'" style="width:auto;">Register</button>
+        </div>
+        <!-- THIS IS THE LOG-OUT BUTTON -->
+        <div class="logout-button">
+          <button onclick="location.href='logout.php'">Log Out</button>
         </div>
 
       </div>
