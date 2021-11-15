@@ -1,3 +1,9 @@
+<?php 
+    define("DAY",60*60*24);
+
+    setcookie("userLog","",time()-DAY);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,56 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>didtheyplay.soccer</title>
     <link rel="stylesheet" href="../css/style.css" />
-    <style>
-      table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-      }
-
-      td, th {
-        border: 1px solid #dddddd;
-        text-align: center;
-        padding: 8px;
-      }
-
-      tr:nth-child(even) {
-        background-color: #dddddd;
-      }
-
-      .button {
-        background-color: #f44336;
-        color: white;
-        padding: 7px 10px;
-        margin: 8px 0;
-        border: solid;
-        cursor: pointer;
-        width: 100%;
-        text-decoration: none;
-      }
-
-      .login-register-buttons{
-        <?php
-          if(isset($_COOKIE['userLog'])){
-            echo "display:none;";
-          }
-        ?>
-      }
-
-      .logout-button{
-        <?php
-          if(isset($_COOKIE['userLog'])){
-            echo "display:block;width:auto;";  
-          }else{
-            echo "display:none;";
-          }
-        ?>
-      }
-      .logout-button button{
-        background-color: #f44336;
-      }
-
-    </style>
   </head>
   <body>
     <header>
@@ -68,11 +24,6 @@
           <button onclick="document.getElementById('register-form').style.display='block'" style="width:auto;">Register</button>
         </div>
 
-        <!-- THIS IS THE LOG-OUT BUTTON -->
-        <div class="logout-button">
-          <button onclick="location.href='logout.php'">Log Out</button>
-        </div>
-
       </div>
       <nav class="header-nav">
         <ul>
@@ -80,68 +31,13 @@
           <li><a href="../players.html">Players</a></li>
           <li><a href="../fixtures.html">Fixtures</a></li>
           <li><a href="../tables.html">Tables</a></li>
-          <li><a href="" id="this">User</a></li>
+          <li><a href="user.php">User</a></li>
         </ul>
       </nav>
     </header>
     <main>
       <section>
-      
-        <?php 
-
-        $loggedIn=false;
-        $u=$_COOKIE['userLog'];
-        if(isset($u)){
-            $loggedIn=true;
-        }
-
-        if($loggedIn==false){
-            echo "<p> The email or password are incorrect </p>";
-        }else{
-          include("connectToDB.inc");
-          $dataBase = connectDB();
-          $query='SELECT * FROM follow JOIN player on follow.playerId=player.playerId;';
-          $result=mysqli_query($dataBase,$query) or die('Query failed: '.mysqli_error($dataBase));
-         
-          echo "<h3 align='center'>Welcome $u</br></h3>";
-
-          echo  "<table>
-                  <tr>
-                    <th>Player Name</th>
-                    <th>Appearances</th>
-                    <th>Minutes</th>
-                    <th>Goals</th>
-                    <th>Assists</th>
-                    <th>Delete Option</th>
-                  </tr>";
-
-          while ($row = mysqli_fetch_array($result, MYSQL_ASSOC))
-          {
-          extract($row);
-
-              if($Username==$_COOKIE['userLog']){
-                define("DAY",60*60*24);
-                setcookie("selectedPlayer",$PlayerId,time()+DAY);
-
-                echo  "<tr>
-                        <td>$FirstName $LastName</td>
-                        <td>$Appearances</td>
-                        <td>$Minutes</td>
-                        <td>$Goals</td>
-                        <td>$Assists</td>
-                        <td><a href='delete.php?id=$PlayerId' class='button'>Delete</a></td>
-                      </tr>";
-              } 
-              
-          }
-          echo "</table>";
-
-          mysql_close($dataBase);
-
-        }        
-
-        ?>
-
+        <p>You have logged out correctly</p>
       </section>
 
       <!-- THESE ARE FOR THE LOGIN AND REGISTER BUTTONS -->
@@ -201,7 +97,6 @@
           </form>
         </div>
       </section>
-
     </main>
     <footer>
       <div>
