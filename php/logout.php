@@ -1,7 +1,21 @@
 <?php 
-    define("DAY",60*60*24);
+  define("DAY",60*60*24);
+  setcookie("userLog","",time()-DAY);
 
-    setcookie("userLog","",time()-DAY);
+  include ("connectToDB.inc");
+  function getUserAdmin(){
+    $dataBase = connectDB();
+  
+    $queryAdmin  = 'SELECT * FROM users ORDER BY username';
+    $resultAdmin = mysqli_query($dataBase, $queryAdmin) or die('Query failed: '.mysqli_error($dataBase));
+    while ($lineAdmin = mysqli_fetch_array($resultAdmin, MYSQL_ASSOC)) {
+      extract($lineAdmin);
+      if($Username==$_COOKIE['userLog']){
+        return $Admin;
+      }
+    }
+    return 0;
+  }
 ?>
 
 <!DOCTYPE html>
@@ -23,10 +37,6 @@
           <button onclick="document.getElementById('login-form').style.display='block'" style="width:auto;">Login</button>
           <button onclick="document.getElementById('register-form').style.display='block'" style="width:auto;">Register</button>
         </div>
-        <!-- THIS IS THE LOG-OUT BUTTON -->
-        <div class="logout-button">
-          <button onclick="location.href='logout.php'">Log Out</button>
-        </div>
 
       </div>
       <nav class="header-nav">
@@ -36,6 +46,11 @@
           <li><a href="../fixtures.html">Fixtures</a></li>
           <li><a href="../tables.html">Tables</a></li>
           <li><a href="user.php">User</a></li>
+          <?php
+            if(getUserAdmin()){
+              echo '<li><a href="admin.php">Admin</a></li>';
+            }
+          ?>
         </ul>
       </nav>
     </header>

@@ -1,7 +1,21 @@
 <?php 
-    define("DAY",60*60*24);
+  define("DAY",60*60*24);
+  setcookie("userLog",$_POST["username"],time()+DAY);
 
-    setcookie("userLog",$_POST["username"],time()+DAY);
+  include ("connectToDB.inc");
+  function getUserAdmin(){
+  $dataBase = connectDB();
+
+  $queryAdmin  = 'SELECT * FROM users ORDER BY username';
+  $resultAdmin = mysqli_query($dataBase, $queryAdmin) or die('Query failed: '.mysqli_error($dataBase));
+  while ($lineAdmin = mysqli_fetch_array($resultAdmin, MYSQL_ASSOC)) {
+    extract($lineAdmin);
+    if($Username==$_COOKIE['userLog']){
+      return $Admin;
+    }
+  }
+  return 0;
+  }
 ?>
 
 <!DOCTYPE html>
