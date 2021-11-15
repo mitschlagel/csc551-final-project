@@ -34,8 +34,7 @@
       
         <?php
 
-            $playerSelected=$_COOKIE['selectedPlayer'];
-            $playerSel=$_GET['id'];
+            
             function deletePlayer($playerNumber) {
                 include("connectToDB.inc");
                 $dataBase = connectDB();
@@ -60,9 +59,12 @@
               mysql_close($dataBase);
             }
 
-            deletePlayer($playerSel);
-
-            showDeletedPlayer($playerSel);
+            if(isset($_GET['followPlayerId'])){
+              $playerSel=$_GET['followPlayerId'];
+              deletePlayer($playerSel);
+              showDeletedPlayer($playerSel);
+            }
+            
 
             
 

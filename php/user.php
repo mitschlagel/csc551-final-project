@@ -149,7 +149,7 @@
                         <td>$Minutes</td>
                         <td>$Goals</td>
                         <td>$Assists</td>
-                        <td><a href='delete.php?id=$PlayerId' class='button'>Delete</a></td>
+                        <td><a href='delete.php?followPlayerId=$PlayerId' class='button'>Delete</a></td>
                       </tr>";
               } 
               
