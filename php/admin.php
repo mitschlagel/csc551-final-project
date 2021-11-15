@@ -30,7 +30,6 @@
           }
         ?>
       }
-
       .logout-button{
         <?php
           if(isset($_COOKIE['userLog'])){
@@ -42,6 +41,22 @@
       }
       .logout-button button{
         background-color: #f44336;
+      }
+      
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: center;
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #dddddd;
       }
 	</style>
   </head>
@@ -88,7 +103,7 @@
             $queryUsers  = 'SELECT * FROM users ORDER BY username';
             $resultUsers = mysqli_query($dataBase, $queryUsers) or die('Query failed: '.mysqli_error($dataBase));
             echo "<br>All User Records:<br>";
-            echo "<table border='1'>";
+            echo "<table>";
             echo "<tr> <td>Username</td> <td>Password</td> <td>Email</td> <td>Phone</td> <td>BirthDate</td></tr>";
             while ($lineUsers = mysqli_fetch_array($resultUsers, MYSQL_ASSOC)) {extract($lineUsers);
               echo "<tr> <td>$Username</td> <td>$Password</td>  <td>$Email</td> <td>$Phone</td> <td>$BirthDate</td></tr>";
@@ -98,7 +113,7 @@
             $queryPlayers  = 'SELECT * FROM player ORDER BY PlayerId';
             $resultPlayers = mysqli_query($dataBase, $queryPlayers) or die('Query failed: '.mysqli_error($dataBase));
             echo "<br>All Player Records:<br>";
-            echo "<table border='1'>";
+            echo "<table>";
             echo "<tr> <td>PlayerId</td> <td>First Name</td> <td>Last Name</td></tr>";
             while ($linePlayers = mysqli_fetch_array($resultPlayers, MYSQL_ASSOC)) {extract($linePlayers);
               echo "<tr> <td>$PlayerId</td>  <td>$FirstName</td> <td>$LastName</td></tr>";
@@ -108,7 +123,7 @@
             $queryFollow  = 'SELECT * FROM follow ORDER BY Username, PlayerId';
             $resultFollow = mysqli_query($dataBase, $queryFollow) or die('Query failed: '.mysqli_error($dataBase));
             echo "<br>All Following Records:<br>";
-            echo "<table border='1'>";
+            echo "<table>";
             echo "<tr> <td>Username</td> <td>PlayerId</td> <td>Appearances</td> <td>Minutes</td> <td>Goals</td> <td>Assists</td></tr>";
             while ($lineFollow = mysqli_fetch_array($resultFollow, MYSQL_ASSOC)) {extract($lineFollow);
               echo "<tr> <td>$Username</td> <td>$PlayerId</td> <td>$Appearances</td> <td>$Minutes</td> <td>$Goals</td> <td>$Assists</td></tr>";
