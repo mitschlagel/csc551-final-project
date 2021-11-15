@@ -32,6 +32,14 @@
         width: 100%;
         text-decoration: none;
       }
+
+      .login-register-buttons{
+        <?php
+          if(isset($_COOKIE['userLog'])){
+            echo "display:none;";
+          }
+        ?>
+      }
     </style>
   </head>
   <body>
