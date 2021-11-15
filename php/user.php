@@ -1,3 +1,19 @@
+<?php
+  include ("connectToDB.inc");
+  function getUserAdmin(){
+    $dataBase = connectDB();
+  
+    $queryAdmin  = 'SELECT * FROM users ORDER BY username';
+    $resultAdmin = mysqli_query($dataBase, $queryAdmin) or die('Query failed: '.mysqli_error($dataBase));
+    while ($lineAdmin = mysqli_fetch_array($resultAdmin, MYSQL_ASSOC)) {
+      extract($lineAdmin);
+      if($Username==$_COOKIE['userLog']){
+        return $Admin;
+      }
+    }
+    return 0;
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -81,6 +97,11 @@
           <li><a href="../fixtures.html">Fixtures</a></li>
           <li><a href="../tables.html">Tables</a></li>
           <li><a href="" id="this">User</a></li>
+          <?php
+            if(getUserAdmin()){
+              echo '<li><a href="admin.php" id="this">Admin</a></li>';
+            }
+          ?>
         </ul>
       </nav>
     </header>
@@ -96,9 +117,8 @@
         }
 
         if($loggedIn==false){
-            echo "<p> The email or password are incorrect </p>";
+            echo "<p> You have to log-in first </p>";
         }else{
-          include("connectToDB.inc");
           $dataBase = connectDB();
           $query='SELECT * FROM follow JOIN player on follow.playerId=player.playerId;';
           $result=mysqli_query($dataBase,$query) or die('Query failed: '.mysqli_error($dataBase));

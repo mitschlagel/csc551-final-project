@@ -1,3 +1,20 @@
+<?php
+  include ("connectToDB.inc");
+  function getUserAdmin(){
+    $dataBase = connectDB();
+  
+    $queryAdmin  = 'SELECT * FROM users ORDER BY username';
+    $resultAdmin = mysqli_query($dataBase, $queryAdmin) or die('Query failed: '.mysqli_error($dataBase));
+    while ($lineAdmin = mysqli_fetch_array($resultAdmin, MYSQL_ASSOC)) {
+      extract($lineAdmin);
+      if($Username==$_COOKIE['userLog']){
+        return $Admin;
+      }
+    }
+    return 0;
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -52,7 +69,12 @@
           <li><a href="../players.html">Players</a></li>
           <li><a href="../fixtures.html">Fixtures</a></li>
           <li><a href="../tables.html">Tables</a></li>
-          <li><a href="user.php" id="this">User</a></li>
+          <li><a href="user.php">User</a></li>
+          <?php
+            if(getUserAdmin()){
+              echo '<li><a href="admin.php" id="this">Admin</a></li>';
+            }
+          ?>
         </ul>
       </nav>
     </header>
@@ -60,46 +82,49 @@
         <section>
       
         <?php
-			include ("connectToDB.inc");
+          function showAllData() {
+            $dataBase = connectDB();
+          
+            $queryUsers  = 'SELECT * FROM users ORDER BY username';
+            $resultUsers = mysqli_query($dataBase, $queryUsers) or die('Query failed: '.mysqli_error($dataBase));
+            echo "<br>All User Records:<br>";
+            echo "<table border='1'>";
+            echo "<tr> <td>Username</td> <td>Password</td> <td>Email</td> <td>Phone</td> <td>BirthDate</td></tr>";
+            while ($lineUsers = mysqli_fetch_array($resultUsers, MYSQL_ASSOC)) {extract($lineUsers);
+              echo "<tr> <td>$Username</td> <td>$Password</td>  <td>$Email</td> <td>$Phone</td> <td>$BirthDate</td></tr>";
+            }
+            echo "</table>";
 
-			function showAllData() {
-				$dataBase = connectDB();
-			
-				$queryUsers  = 'SELECT * FROM users ORDER BY username';
-				$resultUsers = mysqli_query($dataBase, $queryUsers) or die('Query failed: '.mysqli_error($dataBase));
-				echo "<br>All <i>users</i> Records:<br>";
-				echo "<table border='1'>";
-				echo "<tr> <td>Username</td> <td>Password</td> <td>Email</td> <td>Phone</td> <td>BirthDate</td></tr>";
-				while ($lineUsers = mysqli_fetch_array($resultUsers, MYSQL_ASSOC)) {extract($lineUsers);
-					echo "<tr> <td>$Username</td> <td>$Password</td>  <td>$Email</td> <td>$Phone</td> <td>$BirthDate</td></tr>";
-				}
-				echo "</table>";
+            $queryPlayers  = 'SELECT * FROM player ORDER BY PlayerId';
+            $resultPlayers = mysqli_query($dataBase, $queryPlayers) or die('Query failed: '.mysqli_error($dataBase));
+            echo "<br>All Player Records:<br>";
+            echo "<table border='1'>";
+            echo "<tr> <td>PlayerId</td> <td>First Name</td> <td>Last Name</td></tr>";
+            while ($linePlayers = mysqli_fetch_array($resultPlayers, MYSQL_ASSOC)) {extract($linePlayers);
+              echo "<tr> <td>$PlayerId</td>  <td>$FirstName</td> <td>$LastName</td></tr>";
+            }
+            echo "</table>";
 
-				$queryPlayers  = 'SELECT * FROM player ORDER BY PlayerId';
-				$resultPlayers = mysqli_query($dataBase, $queryPlayers) or die('Query failed: '.mysqli_error($dataBase));
-				echo "<br>All <i>player</i> Records:<br>";
-				echo "<table border='1'>";
-				echo "<tr> <td>PlayerId</td> <td>First Name</td> <td>Last Name</td></tr>";
-				while ($linePlayers = mysqli_fetch_array($resultPlayers, MYSQL_ASSOC)) {extract($linePlayers);
-					echo "<tr> <td>$PlayerId</td>  <td>$FirstName</td> <td>$LastName</td></tr>";
-				}
-				echo "</table>";
+            $queryFollow  = 'SELECT * FROM follow ORDER BY Username, PlayerId';
+            $resultFollow = mysqli_query($dataBase, $queryFollow) or die('Query failed: '.mysqli_error($dataBase));
+            echo "<br>All Following Records:<br>";
+            echo "<table border='1'>";
+            echo "<tr> <td>Username</td> <td>PlayerId</td> <td>Appearances</td> <td>Minutes</td> <td>Goals</td> <td>Assists</td></tr>";
+            while ($lineFollow = mysqli_fetch_array($resultFollow, MYSQL_ASSOC)) {extract($lineFollow);
+              echo "<tr> <td>$Username</td> <td>$PlayerId</td> <td>$Appearances</td> <td>$Minutes</td> <td>$Goals</td> <td>$Assists</td></tr>";
+            }
+            echo "</table>";
+          
+            mysqli_close($dataBase);
+          
+          }
 
-				$queryFollow  = 'SELECT * FROM follow ORDER BY Username, PlayerId';
-				$resultFollow = mysqli_query($dataBase, $queryFollow) or die('Query failed: '.mysqli_error($dataBase));
-				echo "<br>All <i>follow</i> Records:<br>";
-				echo "<table border='1'>";
-				echo "<tr> <td>Username</td> <td>PlayerId</td> <td>Appearances</td> <td>Minutes</td> <td>Goals</td> <td>Assists</td></tr>";
-				while ($lineFollow = mysqli_fetch_array($resultFollow, MYSQL_ASSOC)) {extract($lineFollow);
-					echo "<tr> <td>$Username</td> <td>$PlayerId</td> <td>$Appearances</td> <td>$Minutes</td> <td>$Goals</td> <td>$Assists</td></tr>";
-				}
-				echo "</table>";
-			
-				mysqli_close($dataBase);
-			
-			}
-
-			showAllData();
+          if(getUserAdmin()){
+            showAllData();
+          }else{
+            echo "<p>You are not an admin</p>";
+          }
+          
         ?>
         </section>
 
