@@ -25,32 +25,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>didtheyplay.soccer</title>
     <link rel="stylesheet" href="../css/style.css" />
-    <style>
-      table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
+    <style>	
+    .login-register-buttons{
+        <?php
+          if(isset($_COOKIE['userLog'])){
+            echo "display:none;";
+          }
+        ?>
       }
-
-      td, th {
-        border: 1px solid #dddddd;
-        text-align: center;
-        padding: 8px;
+      .logout-button{
+        <?php
+          if(isset($_COOKIE['userLog'])){
+            echo "display:block;width:auto;";  
+          }else{
+            echo "display:none;";
+          }
+        ?>
       }
-
-      tr:nth-child(even) {
-        background-color: #dddddd;
-      }
-
-      .button {
+      .logout-button button{
         background-color: #f44336;
-        color: white;
-        padding: 7px 10px;
-        margin: 8px 0;
-        border: solid;
-        cursor: pointer;
-        width: 100%;
-        text-decoration: none;
       }
     </style>
   </head>
@@ -78,6 +71,11 @@
           <li><a href="fixtures.php">Fixtures</a></li>
           <li><a href="tables.php">Tables</a></li>
           <li><a href="user.php">User</a></li>
+          <?php
+            if(getUserAdmin()){
+              echo '<li><a href="admin.php">Admin</a></li>';
+            }
+          ?>
         </ul>
       </nav>
     </header>
@@ -88,7 +86,6 @@
         $user=$_POST['username'];
         $pass=$_POST['password'];
 
-        include("connectToDB.inc");
         $dataBase = connectDB();
         $query='SELECT * FROM users;';
         $result=mysqli_query($dataBase,$query) or die('Query failed: '.mysqli_error($dataBase));
@@ -113,6 +110,7 @@
 
         if($loggedIn==false){
             echo "<p> The email or password are incorrect </p>";
+            setcookie("userLog","",time()-DAY);
         }else{
             echo    "<h2 style='text-align: center'> 
                         Welcome $u
