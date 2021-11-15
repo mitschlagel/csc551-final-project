@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>didtheyplay.soccer</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
     <header>
       <div class="header-title">
-        <img class="header-image" src="img/ball.png" />
+        <img class="header-image" src="../img/ball.png" />
         <h1>didtheyplay.soccer?</h1>
         
         <!-- THESE ARE FOR THE LOGIN AND REGISTER BUTTONS -->
@@ -21,11 +21,11 @@
       </div>
       <nav class="header-nav">
         <ul>
-          <li><a href="index.html" id="this">Home</a></li>
-          <li><a href="players.html">Players</a></li>
-          <li><a href="fixtures.html">Fixtures</a></li>
-          <li><a href="tables.html">Tables</a></li>
-          <li><a href="php/user.php">User</a></li>
+          <li><a href="index.php" id="this">Home</a></li>
+          <li><a href="players.php">Players</a></li>
+          <li><a href="fixtures.php">Fixtures</a></li>
+          <li><a href="tables.php">Tables</a></li>
+          <li><a href="user.php">User</a></li>
         </ul>
       </nav>
     </header>
@@ -41,7 +41,7 @@
         <div>
           <img
             class="player-example"
-            src="img/fekir.png"
+            src="../img/fekir.png"
             alt="Example of a player search, with data from a player called Nabil Fekir"
             style="float: left"
           />
@@ -56,7 +56,7 @@
       <!-- THESE ARE FOR THE LOGIN AND REGISTER BUTTONS -->
       <section class="login-and-register">
         <div id="login-form" class="login-window">
-          <form class="login-window-box animate" action="php/login.php" method="post">
+          <form class="login-window-box animate" action="login.php" method="post">
             <div class="close-x-div">
               <span onclick="document.getElementById('login-form').style.display='none'" class="close">&times;</span>
             </div>
@@ -79,7 +79,7 @@
         </div>
   
         <div id="register-form" class="register-window">
-          <form class="register-window-box animate" action="php/register.php" method="post">
+          <form class="register-window-box animate" action="register.php" method="post">
             <div class="close-x-div">
               <span onclick="document.getElementById('register-form').style.display='none'" class="close">&times;</span>
             </div>

@@ -21,10 +21,10 @@
       </div>
       <nav class="header-nav">
         <ul>
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="../players.html">Players</a></li>
-          <li><a href="../fixtures.html">Fixtures</a></li>
-          <li><a href="../tables.html">Tables</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="players.php">Players</a></li>
+          <li><a href="fixtures.php">Fixtures</a></li>
+          <li><a href="tables.php">Tables</a></li>
           <li><a href="user.php" id="this">User</a></li>
         </ul>
       </nav>

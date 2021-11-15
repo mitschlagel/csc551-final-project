@@ -4,75 +4,63 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>didtheyplay.soccer</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../node_modules/axios/dist/axios.min.js"></script>
   </head>
 
   <body>
     <header>
       <div class="header-title">
-        <img class="header-image" src="img/ball.png" />
+        <img class="header-image" src="../img/ball.png" />
         <h1>didtheyplay.soccer?</h1>
-          <!-- THESE ARE FOR THE LOGIN AND REGISTER BUTTONS -->
-          <div class="login-register-buttons">
-            <button onclick="document.getElementById('login-form').style.display='block'" style="width:auto;">Login</button>
-            <button onclick="document.getElementById('register-form').style.display='block'" style="width:auto;">Register</button>
-          </div>
+        <!-- THESE ARE FOR THE LOGIN AND REGISTER BUTTONS -->
+        <div class="login-register-buttons">
+          <button
+            onclick="document.getElementById('login-form').style.display='block'"
+            style="width: auto"
+          >
+            Login
+          </button>
+          <button
+            onclick="document.getElementById('register-form').style.display='block'"
+            style="width: auto"
+          >
+            Register
+          </button>
+        </div>
       </div>
       <nav class="header-nav">
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="players.html" id="this">Players</a></li>
-          <li><a href="fixtures.html">Fixtures</a></li>
-          <li><a href="tables.html">Tables</a></li>
-          <li><a href="php/user.php">User</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="players.php">Players</a></li>
+          <li><a href="fixtures.php">Fixtures</a></li>
+          <li><a href="tables.php" id="this">Tables</a></li>
+          <li><a href="user.php">User</a></li>
         </ul>
       </nav>
     </header>
     <main>
-      <section class="title">
-        <h2>Players</h2>
-        <p>
-          Enter a player's last name to display their most recent statistics.
-        </p>
+      <section class="title"><h2>Tables</h2></section>
+
+      <section class="table-select">
+        <label for="league">Choose a league:</label>
+        <select id="league" name="league">
+          <option selected="selected" disabled="disabled"></option>
+          <option value="2" id="champions">UEFA Champions League</option>
+          <option value="3" id="europa">UEFA Europa League</option>
+          <option value="39" id="england">England - Premier League</option>
+          <option value="78" id="germany">Germany - Bundesliga</option>
+          <option value="140" id="spain">Spain - La Liga</option>
+          <option value="61" id="france">France - Ligue 1</option>
+          <option value="135" id="italy">Italy - Serie A</option>
+        </select>
+        <input value="Go" type="button" id="table-select-button"></input>
       </section>
-      <section class="player-search-form">
-        <div class="player-form-section">
-          <label for="player-name">Name:</label>
-          <input type="search" id="player-name" pattern="/\s/g" required />
-        </div>
-        <div class="player-form-section">
-          <label for="league-name">League:</label>
-          <select id="league-name" name="league-name" required>
-            <option selected="selected" disabled="disabled"></option>
-            <option value="2" id="champions">UEFA Champions League</option>
-            <option value="3" id="europa">UEFA Europa League</option>
-            <option value="39" id="england">England - Premier League</option>
-            <option value="78" id="germany">Germany - Bundesliga</option>
-            <option value="140" id="spain">Spain - La Liga</option>
-            <option value="61" id="france">France - Ligue 1</option>
-            <option value="135" id="italy">Italy - Serie A</option>
-          </select>
-        </div>
-        <div class="player-form-section">
-          <label for="season">Season:</label>
-          <select id="season" name="season" required>
-            <option value="2021" id="2021" selected="selected">
-              2021-2022
-            </option>
-            <option value="2020" id="2020">2020-2021</option>
-            <option value="2019" id="2019">2019-2020</option>
-          </select>
-        </div>
-        <div class="player-form-section">
-          <input id="player-search-submit" value="Search" type="button"></input>
-        </div>
-      </section>
-      <section class="players"></section>
+      <section class="table-main"></section>
       <!-- THESE ARE FOR THE LOGIN AND REGISTER BUTTONS -->
       <section class="login-and-register">
         <div id="login-form" class="login-window">
-          <form class="login-window-box animate" action="php/login.php" method="post">
+          <form class="login-window-box animate" action="login.php" method="post">
             <div class="close-x-div">
               <span onclick="document.getElementById('login-form').style.display='none'" class="close">&times;</span>
             </div>
@@ -95,7 +83,7 @@
         </div>
   
         <div id="register-form" class="register-window">
-          <form class="register-window-box animate" action="php/register.php" method="post">
+          <form class="register-window-box animate" action="register.php" method="post">
             <div class="close-x-div">
               <span onclick="document.getElementById('register-form').style.display='none'" class="close">&times;</span>
             </div>
@@ -126,7 +114,11 @@
           </form>
         </div>
       </section>
-      
+
+      <script
+        type="module"
+        src="https://widgets.api-sports.io/football/1.1.8/widget.js"
+      ></script>
     </main>
     <footer>
       <div>
@@ -140,8 +132,6 @@
         >.
       </div>
     </footer>
-
-    <script src="js/getStats.js"></script>
-    <script src="js/savePlayer.js"></script>
+    <script src="../js/tables.js"></script>
   </body>
 </html>
