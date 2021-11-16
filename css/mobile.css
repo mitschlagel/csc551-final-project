@@ -1,0 +1,26 @@
+@media only screen and (max-width: 600px) {
+        header{
+            width:260%;
+        }
+        footer{
+            width:250%;
+            position: absolute;
+        }
+        .main-section{
+            float:center;   
+        }
+        ul#header-list {
+            min-width: 696px;
+            list-style: none;
+            padding-top: 10px;
+        }
+        ul#header-list li {
+            display: inline;
+        }
+        .login-register-buttons{
+            display:inline;
+        }
+        main{
+            width:260%;
+        }
+      }

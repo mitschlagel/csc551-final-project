@@ -21,6 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>didtheyplay.soccer</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/mobile.css" />
     <style>
       	.login-register-buttons{
         <?php
@@ -40,6 +41,16 @@
       }
       .logout-button button{
         background-color: #f44336;
+      }
+            
+      @media only screen and (max-width: 600px) {
+        li > a {
+          font-size: 1.25rem;
+          letter-spacing: 1px;
+        }
+        header h1 {
+          font-size: 2rem;
+        }
       }
     </style>
   </head>
