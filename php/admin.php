@@ -112,9 +112,9 @@
             $resultUsers = mysqli_query($dataBase, $queryUsers) or die('Query failed: '.mysqli_error($dataBase));
             echo "<br>All <i>users</i> Records:<br>";
             echo "<table>";
-            echo "<tr> <th>Username</th> <th>Password</th> <th>Email</th> <th>Phone</th> <th>BirthDate</th></tr>";
+            echo "<tr> <th>Username</th> <th>Password</th> <th>Email</th> <th>Phone</th> <th>BirthDate</th> <th>Admin</th></tr>";
             while ($lineUsers = mysqli_fetch_array($resultUsers, MYSQL_ASSOC)) {extract($lineUsers);
-              echo "<tr> <td>$Username</td> <td>$Password</td>  <td>$Email</td> <td>$Phone</td> <td>$BirthDate</td></tr>";
+              echo "<tr> <td>$Username</td> <td>$Password</td>  <td>$Email</td> <td>$Phone</td> <td>$BirthDate</td> <td>$Admin</td> </tr>";
             }
             echo "</table>";
 
@@ -170,13 +170,7 @@
             } else {
               showAllData();
             }
-          }else{
-            echo "<p>You are not an admin</p>";
-          }
-
-          
-
-          echo <<<END
+            echo <<<END
             <h2>Below you can DELETE records from the tables above</h2>
             <form action="$_SERVER[PHP_SELF]" method="post">
               <p>DELETE FROM <input type="text" name="tableName1" value=""> </p>
@@ -196,6 +190,13 @@
             </form>
           END
           ;
+          }else{
+            echo "<p>You are not an admin</p>";
+          }
+
+          
+
+         
           
         ?>
         </section>
