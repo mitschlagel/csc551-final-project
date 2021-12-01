@@ -1,7 +1,7 @@
 <?php
 
 function connectDB(){
-	$dbConnection = mysqli_connect("sql311.epizy.com","epiz_30333032","T4Cxlhqv7skxB", "epiz_30333032_soccer");
+	$dbConnection = mysqli_connect("127.0.0.1","root","mYsQ1066!", "didtheyplay", "8889");
 	if (mysqli_connect_errno()){
 		die(mysqli_connect_error());
 	}

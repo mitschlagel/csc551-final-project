@@ -1,3 +1,6 @@
+<?php
+  include ("connectToDB.inc");
+  ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -47,7 +50,7 @@
             $query=$q1.$username.$q2.$password.$q2.$email.$q2.$phone.$q2.$birthdate.$q3;
             $result=mysqli_query($dataBase,$query) or die('Query failed: '.mysqli_error($dataBase));
 
-            mysql_close($dataBase);
+            mysqli_close($dataBase);
 
             echo "<h2>User $username registered correctly</h2>";
         ?>
