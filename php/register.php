@@ -63,10 +63,10 @@
       </div>
       <nav class="header-nav">
         <ul>
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="../players.html">Players</a></li>
-          <li><a href="../fixtures.html">Fixtures</a></li>
-          <li><a href="../tables.html">Tables</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="players.php">Players</a></li>
+          <li><a href="fixtures.php">Fixtures</a></li>
+          <li><a href="tables.php">Tables</a></li>
           <li><a href="user.php" id="this">User</a></li>
           <?php
             if(getUserAdmin()){
@@ -89,7 +89,7 @@
             $q1='INSERT INTO users VALUES("';
             $q2='","';
             $q3='");';
-            $query=$q1.$username.$q2.$password.$q2.$email.$q2.$phone.$q2.$birthdate.$q3;
+            $query=$q1.$username.$q2.$password.$q2.$email.$q2.$phone.$q2.$birthdate.$q2."0".$q3;
             $result=mysqli_query($dataBase,$query) or die('Query failed: '.mysqli_error($dataBase));
 
             mysql_close($dataBase);
