@@ -1,31 +1,79 @@
+<?php
+  include ("connectToDB.inc");
+  function getUserAdmin(){
+    $dataBase = connectDB();
+  
+    $queryAdmin  = 'SELECT * FROM users ORDER BY username';
+    $resultAdmin = mysqli_query($dataBase, $queryAdmin) or die('Query failed: '.mysqli_error($dataBase));
+    while ($lineAdmin = mysqli_fetch_array($resultAdmin, MYSQL_ASSOC)) {
+      extract($lineAdmin);
+      if($Username==$_COOKIE['userLog']){
+        return $Admin;
+      }
+    }
+    return 0;
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>didtheyplay.soccer</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/mobile.css" />
+    <script src="../node_modules/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <style>
+     	.login-register-buttons{
+        <?php
+          if(isset($_COOKIE['userLog'])){
+            echo "display:none;";
+          }
+        ?>
+      }
+      .logout-button{
+        <?php
+          if(isset($_COOKIE['userLog'])){
+            echo "display:block;width:auto;";  
+          }else{
+            echo "display:none;";
+          }
+        ?>
+      }
+      .logout-button button{
+        background-color: #f44336;
+      }
+    </style>
   </head>
 
   <body>
     <header>
       <div class="header-title">
-        <img class="header-image" src="img/ball.png" />
+        <img class="header-image" src="../img/ball.png" />
         <h1>didtheyplay.soccer?</h1>
           <!-- THESE ARE FOR THE LOGIN AND REGISTER BUTTONS -->
           <div class="login-register-buttons">
             <button onclick="document.getElementById('login-form').style.display='block'" style="width:auto;">Login</button>
             <button onclick="document.getElementById('register-form').style.display='block'" style="width:auto;">Register</button>
           </div>
+          <!-- THIS IS THE LOG-OUT BUTTON -->
+          <div class="logout-button">
+            <button onclick="location.href='logout.php'">Log Out</button>
+          </div>
       </div>
       <nav class="header-nav">
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="players.html" id="this">Players</a></li>
-          <li><a href="fixtures.html">Fixtures</a></li>
-          <li><a href="tables.html">Tables</a></li>
-          <li><a href="php/user.php">User</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="players.php" id="this">Players</a></li>
+          <li><a href="fixtures.php">Fixtures</a></li>
+          <li><a href="tables.php">Tables</a></li>
+          <li><a href="user.php">User</a></li>
+          <?php
+            if(getUserAdmin()){
+              echo '<li><a href="admin.php">Admin</a></li>';
+            }
+          ?>
         </ul>
       </nav>
     </header>
@@ -72,7 +120,7 @@
       <!-- THESE ARE FOR THE LOGIN AND REGISTER BUTTONS -->
       <section class="login-and-register">
         <div id="login-form" class="login-window">
-          <form class="login-window-box animate" action="php/login.php" method="post">
+          <form class="login-window-box animate" action="login.php" method="post">
             <div class="close-x-div">
               <span onclick="document.getElementById('login-form').style.display='none'" class="close">&times;</span>
             </div>
@@ -95,7 +143,7 @@
         </div>
   
         <div id="register-form" class="register-window">
-          <form class="register-window-box animate" action="php/register.php" method="post">
+          <form class="register-window-box animate" action="register.php" method="post">
             <div class="close-x-div">
               <span onclick="document.getElementById('register-form').style.display='none'" class="close">&times;</span>
             </div>
@@ -141,7 +189,7 @@
       </div>
     </footer>
 
-    <script src="js/getStats.js"></script>
-    <script src="js/savePlayer.js"></script>
+    <script src="../js/getStats.js"></script>
+    <script src="../js/savePlayer.js"></script>
   </body>
 </html>

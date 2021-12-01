@@ -21,6 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>didtheyplay.soccer</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/mobile.css" />
     <style>
       table {
         font-family: arial, sans-serif;
@@ -92,14 +93,14 @@
       </div>
       <nav class="header-nav">
         <ul>
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="../players.html">Players</a></li>
-          <li><a href="../fixtures.html">Fixtures</a></li>
-          <li><a href="../tables.html">Tables</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="players.php">Players</a></li>
+          <li><a href="fixtures.php">Fixtures</a></li>
+          <li><a href="tables.php">Tables</a></li>
           <li><a href="" id="this">User</a></li>
           <?php
             if(getUserAdmin()){
-              echo '<li><a href="admin.php" id="this">Admin</a></li>';
+              echo '<li><a href="admin.php">Admin</a></li>';
             }
           ?>
         </ul>
@@ -149,7 +150,7 @@
                         <td>$Minutes</td>
                         <td>$Goals</td>
                         <td>$Assists</td>
-                        <td><a href='delete.php?id=$PlayerId' class='button'>Delete</a></td>
+                        <td><a href='delete.php?followPlayerId=$PlayerId' class='button'>Delete</a></td>
                       </tr>";
               } 
               

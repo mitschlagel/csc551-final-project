@@ -1,15 +1,63 @@
+<?php
+  include ("connectToDB.inc");
+  function getUserAdmin(){
+    $dataBase = connectDB();
+  
+    $queryAdmin  = 'SELECT * FROM users ORDER BY username';
+    $resultAdmin = mysqli_query($dataBase, $queryAdmin) or die('Query failed: '.mysqli_error($dataBase));
+    while ($lineAdmin = mysqli_fetch_array($resultAdmin, MYSQL_ASSOC)) {
+      extract($lineAdmin);
+      if($Username==$_COOKIE['userLog']){
+        return $Admin;
+      }
+    }
+    return 0;
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>didtheyplay.soccer</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/mobile.css" />
+    <style>
+      	.login-register-buttons{
+        <?php
+          if(isset($_COOKIE['userLog'])){
+            echo "display:none;";
+          }
+        ?>
+      }
+      .logout-button{
+        <?php
+          if(isset($_COOKIE['userLog'])){
+            echo "display:block;width:auto;";  
+          }else{
+            echo "display:none;";
+          }
+        ?>
+      }
+      .logout-button button{
+        background-color: #f44336;
+      }
+            
+      @media only screen and (max-width: 600px) {
+        li > a {
+          font-size: 1.25rem;
+          letter-spacing: 1px;
+        }
+        header h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
   </head>
   <body>
     <header>
       <div class="header-title">
-        <img class="header-image" src="img/ball.png" />
+        <img class="header-image" src="../img/ball.png" />
         <h1>didtheyplay.soccer?</h1>
         
         <!-- THESE ARE FOR THE LOGIN AND REGISTER BUTTONS -->
@@ -18,14 +66,24 @@
           <button onclick="document.getElementById('register-form').style.display='block'" style="width:auto;">Register</button>
         </div>
 
+        <!-- THIS IS THE LOG-OUT BUTTON -->
+        <div class="logout-button">
+          <button onclick="location.href='logout.php'">Log Out</button>
+        </div>
+
       </div>
       <nav class="header-nav">
         <ul>
-          <li><a href="index.html" id="this">Home</a></li>
-          <li><a href="players.html">Players</a></li>
-          <li><a href="fixtures.html">Fixtures</a></li>
-          <li><a href="tables.html">Tables</a></li>
-          <li><a href="php/user.php">User</a></li>
+          <li><a href="index.php" id="this">Home</a></li>
+          <li><a href="players.php">Players</a></li>
+          <li><a href="fixtures.php">Fixtures</a></li>
+          <li><a href="tables.php">Tables</a></li>
+          <li><a href="user.php">User</a></li>
+          <?php
+            if(getUserAdmin()){
+              echo '<li><a href="admin.php">Admin</a></li>';
+            }
+          ?>
         </ul>
       </nav>
     </header>
@@ -41,7 +99,7 @@
         <div>
           <img
             class="player-example"
-            src="img/fekir.png"
+            src="../img/fekir.png"
             alt="Example of a player search, with data from a player called Nabil Fekir"
             style="float: left"
           />
@@ -56,7 +114,7 @@
       <!-- THESE ARE FOR THE LOGIN AND REGISTER BUTTONS -->
       <section class="login-and-register">
         <div id="login-form" class="login-window">
-          <form class="login-window-box animate" action="php/login.php" method="post">
+          <form class="login-window-box animate" action="login.php" method="post">
             <div class="close-x-div">
               <span onclick="document.getElementById('login-form').style.display='none'" class="close">&times;</span>
             </div>
@@ -79,7 +137,7 @@
         </div>
   
         <div id="register-form" class="register-window">
-          <form class="register-window-box animate" action="php/register.php" method="post">
+          <form class="register-window-box animate" action="register.php" method="post">
             <div class="close-x-div">
               <span onclick="document.getElementById('register-form').style.display='none'" class="close">&times;</span>
             </div>

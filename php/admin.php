@@ -22,8 +22,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>didtheyplay.soccer</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/mobile.css" />
 	<style>
-		.login-register-buttons{
+		  .login-register-buttons{
         <?php
           if(isset($_COOKIE['userLog'])){
             echo "display:none;";
@@ -42,7 +43,7 @@
       .logout-button button{
         background-color: #f44336;
       }
-      
+
       table {
         font-family: arial, sans-serif;
         border-collapse: collapse;
@@ -58,6 +59,13 @@
       tr:nth-child(even) {
         background-color: #dddddd;
       }
+
+      input[type="text"]{
+        width: 20%;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
 	</style>
   </head>
   <body>
@@ -72,18 +80,18 @@
           <button onclick="document.getElementById('register-form').style.display='block'" style="width:auto;">Register</button>
         </div>
 
-		<!-- THIS IS THE LOG-OUT BUTTON -->
-		<div class="logout-button">
-		<button onclick="location.href='logout.php'">Log Out</button>
-		</div>
+        <!-- THIS IS THE LOG-OUT BUTTON -->
+        <div class="logout-button">
+          <button onclick="location.href='logout.php'">Log Out</button>
+        </div>
 
       </div>
       <nav class="header-nav">
         <ul>
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="../players.html">Players</a></li>
-          <li><a href="../fixtures.html">Fixtures</a></li>
-          <li><a href="../tables.html">Tables</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="players.php">Players</a></li>
+          <li><a href="fixtures.php">Fixtures</a></li>
+          <li><a href="tables.php">Tables</a></li>
           <li><a href="user.php">User</a></li>
           <?php
             if(getUserAdmin()){
@@ -102,19 +110,19 @@
           
             $queryUsers  = 'SELECT * FROM users ORDER BY username';
             $resultUsers = mysqli_query($dataBase, $queryUsers) or die('Query failed: '.mysqli_error($dataBase));
-            echo "<br>All User Records:<br>";
+            echo "<br>All <i>users</i> Records:<br>";
             echo "<table>";
-            echo "<tr> <td>Username</td> <td>Password</td> <td>Email</td> <td>Phone</td> <td>BirthDate</td></tr>";
+            echo "<tr> <th>Username</th> <th>Password</th> <th>Email</th> <th>Phone</th> <th>BirthDate</th> <th>Admin</th></tr>";
             while ($lineUsers = mysqli_fetch_array($resultUsers, MYSQL_ASSOC)) {extract($lineUsers);
-              echo "<tr> <td>$Username</td> <td>$Password</td>  <td>$Email</td> <td>$Phone</td> <td>$BirthDate</td></tr>";
+              echo "<tr> <td>$Username</td> <td>$Password</td>  <td>$Email</td> <td>$Phone</td> <td>$BirthDate</td> <td>$Admin</td> </tr>";
             }
             echo "</table>";
 
             $queryPlayers  = 'SELECT * FROM player ORDER BY PlayerId';
             $resultPlayers = mysqli_query($dataBase, $queryPlayers) or die('Query failed: '.mysqli_error($dataBase));
-            echo "<br>All Player Records:<br>";
+            echo "<br>All <i>player</i> Records:<br>";
             echo "<table>";
-            echo "<tr> <td>PlayerId</td> <td>First Name</td> <td>Last Name</td></tr>";
+            echo "<tr> <th>PlayerId</th> <th>First Name</th> <th>Last Name</th></tr>";
             while ($linePlayers = mysqli_fetch_array($resultPlayers, MYSQL_ASSOC)) {extract($linePlayers);
               echo "<tr> <td>$PlayerId</td>  <td>$FirstName</td> <td>$LastName</td></tr>";
             }
@@ -122,9 +130,9 @@
 
             $queryFollow  = 'SELECT * FROM follow ORDER BY Username, PlayerId';
             $resultFollow = mysqli_query($dataBase, $queryFollow) or die('Query failed: '.mysqli_error($dataBase));
-            echo "<br>All Following Records:<br>";
+            echo "<br>All <i>follow</i> Records:<br>";
             echo "<table>";
-            echo "<tr> <td>Username</td> <td>PlayerId</td> <td>Appearances</td> <td>Minutes</td> <td>Goals</td> <td>Assists</td></tr>";
+            echo "<tr> <th>Username</th> <th>PlayerId</th> <th>Appearances</th> <th>Minutes</th> <th>Goals</th> <th>Assists</th></tr>";
             while ($lineFollow = mysqli_fetch_array($resultFollow, MYSQL_ASSOC)) {extract($lineFollow);
               echo "<tr> <td>$Username</td> <td>$PlayerId</td> <td>$Appearances</td> <td>$Minutes</td> <td>$Goals</td> <td>$Assists</td></tr>";
             }
@@ -134,11 +142,61 @@
           
           }
 
+          function deleteRecords() {
+            $dataBase = connectDB();
+            $q1='DELETE FROM ';
+            $q2=' WHERE ';
+            $query=$q1.$_POST['tableName1'].$q2.$_POST['attributeName1'].'='.$_POST['attributeValue1'];
+            $result=mysqli_query($dataBase,$query) or die('Query failed: '.mysqli_error($dataBase));
+            mysql_close($dataBase);
+          }
+          function updateRecords() {
+            $dataBase = connectDB();
+            $q1='UPDATE ';
+            $q2=' SET ';
+            $q3=' WHERE ';
+            $query=$q1.$_POST['tableName2'].$q2.$_POST['attributeName2'].'='.$_POST['attributeValue2'].$q3.$_POST['attributeName3'].'='.$_POST['attributeValue3'];
+            $result=mysqli_query($dataBase,$query) or die('Query failed: '.mysqli_error($dataBase));
+            mysql_close($dataBase);
+          }
+
           if(getUserAdmin()){
-            showAllData();
+            if (isset($_POST['tableName1']) && isset($_POST['attributeName1']) && isset($_POST['attributeValue1'])) {
+              deleteRecords();
+              showAllData();
+            } else if (isset($_POST['tableName2']) && isset($_POST['attributeName2']) && isset($_POST['attributeValue2']) && isset($_POST['attributeName3']) && isset($_POST['attributeValue3'])) {
+              updateRecords();
+              showAllData();
+            } else {
+              showAllData();
+            }
+            echo <<<END
+            <h2>Below you can DELETE records from the tables above</h2>
+            <form action="$_SERVER[PHP_SELF]" method="post">
+              <p>DELETE FROM <input type="text" name="tableName1" value=""> </p>
+              <p>WHERE <input type="text" name="attributeName1" value="">  = <input type="text" name="attributeValue1" value=""> </p>
+              <input type='submit' value='Submit'>
+            </form>
+          END
+          ;
+
+          echo <<<END
+            <h2>Below you can UPDATE records in the tables above</h2>
+            <form action="$_SERVER[PHP_SELF]" method="post">
+              <p>UPDATE <input type="text" name="tableName2" value=""> </p>
+              <p>SET <input type="text" name="attributeName2" value=""> = <input type="text" name="attributeValue2" value=""> </p>
+              <p>WHERE <input type="text" name="attributeName3" value=""> = <input type="text" name="attributeValue3" value=""> </p>
+              <input type='submit' value='Submit'>
+            </form>
+          END
+          ;
           }else{
             echo "<p>You are not an admin</p>";
           }
+
+          
+
+         
           
         ?>
         </section>

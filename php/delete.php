@@ -1,3 +1,19 @@
+<?php
+  include ("connectToDB.inc");
+  function getUserAdmin(){
+    $dataBase = connectDB();
+  
+    $queryAdmin  = 'SELECT * FROM users ORDER BY username';
+    $resultAdmin = mysqli_query($dataBase, $queryAdmin) or die('Query failed: '.mysqli_error($dataBase));
+    while ($lineAdmin = mysqli_fetch_array($resultAdmin, MYSQL_ASSOC)) {
+      extract($lineAdmin);
+      if($Username==$_COOKIE['userLog']){
+        return $Admin;
+      }
+    }
+    return 0;
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,6 +21,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>didtheyplay.soccer</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/mobile.css" />
+    <style>	
+    .login-register-buttons{
+        <?php
+          if(isset($_COOKIE['userLog'])){
+            echo "display:none;";
+          }
+        ?>
+      }
+      .logout-button{
+        <?php
+          if(isset($_COOKIE['userLog'])){
+            echo "display:block;width:auto;";  
+          }else{
+            echo "display:none;";
+          }
+        ?>
+      }
+      .logout-button button{
+        background-color: #f44336;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -17,15 +55,24 @@
           <button onclick="document.getElementById('login-form').style.display='block'" style="width:auto;">Login</button>
           <button onclick="document.getElementById('register-form').style.display='block'" style="width:auto;">Register</button>
         </div>
+        <!-- THIS IS THE LOG-OUT BUTTON -->
+        <div class="logout-button">
+          <button onclick="location.href='logout.php'">Log Out</button>
+        </div>
 
       </div>
       <nav class="header-nav">
         <ul>
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="../players.html">Players</a></li>
-          <li><a href="../fixtures.html">Fixtures</a></li>
-          <li><a href="../tables.html">Tables</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="players.php">Players</a></li>
+          <li><a href="fixtures.php">Fixtures</a></li>
+          <li><a href="tables.php">Tables</a></li>
           <li><a href="user.php" id="this">User</a></li>
+          <?php
+            if(getUserAdmin()){
+              echo '<li><a href="admin.php">Admin</a></li>';
+            }
+          ?>
         </ul>
       </nav>
     </header>
@@ -34,10 +81,8 @@
       
         <?php
 
-            $playerSelected=$_COOKIE['selectedPlayer'];
-            $playerSel=$_GET['id'];
+            
             function deletePlayer($playerNumber) {
-                include("connectToDB.inc");
                 $dataBase = connectDB();
                 $qy1=$_COOKIE['userLog'];
                 $query='DELETE FROM follow WHERE username="'.$qy1.'" AND PlayerId="'.$playerNumber.'";';
@@ -60,9 +105,12 @@
               mysql_close($dataBase);
             }
 
-            deletePlayer($playerSel);
-
-            showDeletedPlayer($playerSel);
+            if(isset($_GET['followPlayerId'])){
+              $playerSel=$_GET['followPlayerId'];
+              deletePlayer($playerSel);
+              showDeletedPlayer($playerSel);
+            }
+            
 
             
 

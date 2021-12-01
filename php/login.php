@@ -1,7 +1,21 @@
 <?php 
-    define("DAY",60*60*24);
+  define("DAY",60*60*24);
+  setcookie("userLog",$_POST["username"],time()+DAY);
 
-    setcookie("userLog",$_POST["username"],time()+DAY);
+  include ("connectToDB.inc");
+  function getUserAdmin(){
+  $dataBase = connectDB();
+
+  $queryAdmin  = 'SELECT * FROM users ORDER BY username';
+  $resultAdmin = mysqli_query($dataBase, $queryAdmin) or die('Query failed: '.mysqli_error($dataBase));
+  while ($lineAdmin = mysqli_fetch_array($resultAdmin, MYSQL_ASSOC)) {
+    extract($lineAdmin);
+    if($Username==$_COOKIE['userLog']){
+      return $Admin;
+    }
+  }
+  return 0;
+  }
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +25,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>didtheyplay.soccer</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/mobile.css" />
+    <style>	
+    .login-register-buttons{
+        <?php
+          if(isset($_COOKIE['userLog'])){
+            echo "display:none;";
+          }
+        ?>
+      }
+      .logout-button{
+        <?php
+          if(isset($_COOKIE['userLog'])){
+            echo "display:block;width:auto;";  
+          }else{
+            echo "display:none;";
+          }
+        ?>
+      }
+      .logout-button button{
+        background-color: #f44336;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -23,15 +59,24 @@
           <button onclick="document.getElementById('login-form').style.display='block'" style="width:auto;">Login</button>
           <button onclick="document.getElementById('register-form').style.display='block'" style="width:auto;">Register</button>
         </div>
+        <!-- THIS IS THE LOG-OUT BUTTON -->
+        <div class="logout-button">
+          <button onclick="location.href='logout.php'">Log Out</button>
+        </div>
 
       </div>
       <nav class="header-nav">
         <ul>
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="../players.html">Players</a></li>
-          <li><a href="../fixtures.html">Fixtures</a></li>
-          <li><a href="../tables.html">Tables</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="players.php">Players</a></li>
+          <li><a href="fixtures.php">Fixtures</a></li>
+          <li><a href="tables.php">Tables</a></li>
           <li><a href="user.php">User</a></li>
+          <?php
+            if(getUserAdmin()){
+              echo '<li><a href="admin.php">Admin</a></li>';
+            }
+          ?>
         </ul>
       </nav>
     </header>
@@ -42,7 +87,6 @@
         $user=$_POST['username'];
         $pass=$_POST['password'];
 
-        include("connectToDB.inc");
         $dataBase = connectDB();
         $query='SELECT * FROM users;';
         $result=mysqli_query($dataBase,$query) or die('Query failed: '.mysqli_error($dataBase));
@@ -67,6 +111,7 @@
 
         if($loggedIn==false){
             echo "<p> The email or password are incorrect </p>";
+            setcookie("userLog","",time()-DAY);
         }else{
             echo    "<h2 style='text-align: center'> 
                         Welcome $u

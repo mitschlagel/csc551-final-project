@@ -358,3 +358,31 @@ button:hover {
     font-size: 2rem;
   }
 }
+
+/* PHP Styling */
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.button {
+  background-color: #f44336;
+  color: white;
+  padding: 7px 10px;
+  margin: 8px 0;
+  border: solid;
+  cursor: pointer;
+  width: 100%;
+  text-decoration: none;
+}

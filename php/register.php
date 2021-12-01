@@ -1,3 +1,19 @@
+<?php
+  include ("connectToDB.inc");
+  function getUserAdmin(){
+    $dataBase = connectDB();
+  
+    $queryAdmin  = 'SELECT * FROM users ORDER BY username';
+    $resultAdmin = mysqli_query($dataBase, $queryAdmin) or die('Query failed: '.mysqli_error($dataBase));
+    while ($lineAdmin = mysqli_fetch_array($resultAdmin, MYSQL_ASSOC)) {
+      extract($lineAdmin);
+      if($Username==$_COOKIE['userLog']){
+        return $Admin;
+      }
+    }
+    return 0;
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,6 +21,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>didtheyplay.soccer</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/mobile.css" />
+    <style>
+      	.login-register-buttons{
+        <?php
+          if(isset($_COOKIE['userLog'])){
+            echo "display:none;";
+          }
+        ?>
+      }
+      .logout-button{
+        <?php
+          if(isset($_COOKIE['userLog'])){
+            echo "display:block;width:auto;";  
+          }else{
+            echo "display:none;";
+          }
+        ?>
+      }
+      .logout-button button{
+        background-color: #f44336;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -17,6 +55,10 @@
           <button onclick="document.getElementById('login-form').style.display='block'" style="width:auto;">Login</button>
           <button onclick="document.getElementById('register-form').style.display='block'" style="width:auto;">Register</button>
         </div>
+        <!-- THIS IS THE LOG-OUT BUTTON -->
+        <div class="logout-button">
+          <button onclick="location.href='logout.php'">Log Out</button>
+        </div>
 
       </div>
       <nav class="header-nav">
@@ -26,12 +68,16 @@
           <li><a href="../fixtures.html">Fixtures</a></li>
           <li><a href="../tables.html">Tables</a></li>
           <li><a href="user.php" id="this">User</a></li>
+          <?php
+            if(getUserAdmin()){
+              echo '<li><a href="admin.php">Admin</a></li>';
+            }
+          ?>
         </ul>
       </nav>
     </header>
     <main>
       <section>
-      
         <?php
             $username=$_POST['username'];
             $password=$_POST['password'];
@@ -39,7 +85,6 @@
             $phone=$_POST['phone'];
             $birthdate=$_POST['birthdate'];
             
-            include("connectToDB.inc");
             $dataBase = connectDB();
             $q1='INSERT INTO users VALUES("';
             $q2='","';

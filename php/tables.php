@@ -1,15 +1,55 @@
+<?php
+  include ("connectToDB.inc");
+  function getUserAdmin(){
+    $dataBase = connectDB();
+  
+    $queryAdmin  = 'SELECT * FROM users ORDER BY username';
+    $resultAdmin = mysqli_query($dataBase, $queryAdmin) or die('Query failed: '.mysqli_error($dataBase));
+    while ($lineAdmin = mysqli_fetch_array($resultAdmin, MYSQL_ASSOC)) {
+      extract($lineAdmin);
+      if($Username==$_COOKIE['userLog']){
+        return $Admin;
+      }
+    }
+    return 0;
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>didtheyplay.soccer</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/mobile.css" />
+    <script src="../node_modules/axios/dist/axios.min.js"></script>
+    <style>
+      	.login-register-buttons{
+        <?php
+          if(isset($_COOKIE['userLog'])){
+            echo "display:none;";
+          }
+        ?>
+      }
+      .logout-button{
+        <?php
+          if(isset($_COOKIE['userLog'])){
+            echo "display:block;width:auto;";  
+          }else{
+            echo "display:none;";
+          }
+        ?>
+      }
+      .logout-button button{
+        background-color: #f44336;
+      }
+    </style>
   </head>
+
   <body>
     <header>
       <div class="header-title">
-        <img class="header-image" src="img/ball.png" />
+        <img class="header-image" src="../img/ball.png" />
         <h1>didtheyplay.soccer?</h1>
         <!-- THESE ARE FOR THE LOGIN AND REGISTER BUTTONS -->
         <div class="login-register-buttons">
@@ -26,41 +66,48 @@
             Register
           </button>
         </div>
+        <!-- THIS IS THE LOG-OUT BUTTON -->
+        <div class="logout-button">
+          <button onclick="location.href='logout.php'">Log Out</button>
+        </div>
       </div>
       <nav class="header-nav">
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="players.html">Players</a></li>
-          <li><a href="fixtures.html" id="this">Fixtures</a></li>
-          <li><a href="tables.html">Tables</a></li>
-          <li><a href="php/user.php">User</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="players.php">Players</a></li>
+          <li><a href="fixtures.php">Fixtures</a></li>
+          <li><a href="tables.php" id="this">Tables</a></li>
+          <li><a href="user.php">User</a></li>
+          <?php
+            if(getUserAdmin()){
+              echo '<li><a href="admin.php">Admin</a></li>';
+            }
+          ?>
         </ul>
       </nav>
     </header>
     <main>
-      <section class="title">
-        <h2>Fixtures</h2>
+      <section class="title"><h2>Tables</h2></section>
+
+      <section class="table-select">
+        <label for="league">Choose a league:</label>
+        <select id="league" name="league">
+          <option selected="selected" disabled="disabled"></option>
+          <option value="2" id="champions">UEFA Champions League</option>
+          <option value="3" id="europa">UEFA Europa League</option>
+          <option value="39" id="england">England - Premier League</option>
+          <option value="78" id="germany">Germany - Bundesliga</option>
+          <option value="140" id="spain">Spain - La Liga</option>
+          <option value="61" id="france">France - Ligue 1</option>
+          <option value="135" id="italy">Italy - Serie A</option>
+        </select>
+        <input value="Go" type="button" id="table-select-button"></input>
       </section>
-      <section class="fixtures-content">
-        <p>All current fixtures world wide are displayed below.</p>
-        <div
-          id="wg-api-football-livescore"
-          data-host="v3.football.api-sports.io"
-          data-refresh="60"
-          data-key="569fd3056fbfd09a47a568e3b82163f7"
-          data-theme=""
-          data-show-errors="false"
-          class="api_football_loader"
-        ></div>
-        <script
-          type="module"
-          src="https://widgets.api-sports.io/football/1.1.8/widget.js"
-        ></script>
-      </section>
+      <section class="table-main"></section>
       <!-- THESE ARE FOR THE LOGIN AND REGISTER BUTTONS -->
       <section class="login-and-register">
         <div id="login-form" class="login-window">
-          <form class="login-window-box animate" action="php/login.php" method="post">
+          <form class="login-window-box animate" action="login.php" method="post">
             <div class="close-x-div">
               <span onclick="document.getElementById('login-form').style.display='none'" class="close">&times;</span>
             </div>
@@ -83,7 +130,7 @@
         </div>
   
         <div id="register-form" class="register-window">
-          <form class="register-window-box animate" action="php/register.php" method="post">
+          <form class="register-window-box animate" action="register.php" method="post">
             <div class="close-x-div">
               <span onclick="document.getElementById('register-form').style.display='none'" class="close">&times;</span>
             </div>
@@ -114,6 +161,11 @@
           </form>
         </div>
       </section>
+
+      <script
+        type="module"
+        src="https://widgets.api-sports.io/football/1.1.8/widget.js"
+      ></script>
     </main>
     <footer>
       <div>
@@ -127,5 +179,6 @@
         >.
       </div>
     </footer>
+    <script src="../js/tables.js"></script>
   </body>
 </html>
