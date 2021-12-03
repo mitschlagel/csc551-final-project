@@ -43,8 +43,10 @@ const displayStats = (statistics) => {
     const bio = element.player;
     const stats = element.statistics[0];
     const birthday = new Date(bio.birth.date);
+    const player_id = element.player.id;
     playerProfile.innerHTML = `<div class="player-profile-header">
-    <h2>${bio.firstname} ${bio.lastname}</h2>
+    <h2><span id="first_name">${bio.firstname}</span>
+    <span id="last_name">${bio.lastname}</span></h2>
   </div>
   <div class="player-profile-body">
     <div class="name-photo">
@@ -56,6 +58,7 @@ const displayStats = (statistics) => {
     <div class="bio-info">
       <div>
         <ul>
+          <li>Player ID: <span id="player_id">${player_id}</span></li>
           <li>Date of Birth: ${birthday.toLocaleDateString()} </li>
           <li>Age: ${bio.age} years old</li>
           <li>Nationality: ${bio.nationality}</li>
@@ -67,10 +70,16 @@ const displayStats = (statistics) => {
 
         <ul>
           
-          <li>Total Appearences: ${stats.games.appearences}</li>
-          <li>Total Minutes: ${stats.games.minutes}</li>
-          <li>Goals: ${stats.goals.total}</li>
-          <li>Assists: ${stats.goals.assists || "0"}</li>
+          <li>Total Appearences: <span id="appearences">${
+            stats.games.appearences
+          }</span></li>
+          <li>Total Minutes: <span id="minutes">${
+            stats.games.minutes
+          }</span></li>
+          <li>Goals: <span id="goals">${stats.goals.total}</span></li>
+          <li>Assists: <span id="assists">${
+            stats.goals.assists || "0"
+          }</span></li>
         </ul>
       </div>
     </div>

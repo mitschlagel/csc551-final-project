@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="../css/mobile.css" />
     <script src="../node_modules/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
     <style>
      	.login-register-buttons{
         <?php
@@ -116,7 +118,10 @@
           <input id="player-search-submit" value="Search" type="button"></input>
         </div>
       </section>
-      <section class="players"></section>
+      <section class="players">
+
+
+      </section>
       <!-- THESE ARE FOR THE LOGIN AND REGISTER BUTTONS -->
       <section class="login-and-register">
         <div id="login-form" class="login-window">
