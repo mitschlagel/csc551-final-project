@@ -6,40 +6,42 @@
 // connection.connect(function (error) {
 //   if (error) throw error;
 //   console.log("Connected!");
+const parseCookie = (cookieName) => {
+  const regex = new RegExp(cookieName + "=([^;]+)");
+  const value = regex.exec(document.cookie);
+  return value != null ? unescape(value[1]) : null;
+};
 
 $(document).ready(function () {
   $(document).on("click", ".did-they-play", function () {
     // if logged in:
-    // const player_id = $("#player_id").text();
-    // const first_name = $("#first_name").text();
-    // const last_name = $("#last_name").text();
-    // const appearences = $("#appearences").text();
-    // const minutes = $("#minutes").text();
-    // const goals = $("#goals").text();
-    // const assists = $("#assists").text();
-    const data = {
-      player_id: $("#player_id").text(),
-      first_name: $("#first_name").text(),
-      last_name: $("#last_name").text(),
-      appearences: $("#appearences").text(),
-      minutes: $("#minutes").text(),
-      goals: $("#goals").text(),
-      assists: $("#assists").text(),
-    };
+    const user = parseCookie("userLog");
 
-    const dataString = JSON.stringify(data);
+    if (user) {
+      const data = {
+        player_id: $("#player_id").text(),
+        first_name: $("#first_name").text(),
+        last_name: $("#last_name").text(),
+        appearences: $("#appearences").text(),
+        minutes: $("#minutes").text(),
+        goals: $("#goals").text(),
+        assists: $("#assists").text(),
+        userName: user,
+      };
 
-    $.ajax({
-      type: "POST",
-      url: "../php/followPlayer.php",
-      data: { data: dataString },
-      success: function (response) {
-        console.log(response);
-        console.log(dataString);
-      },
-    });
+      const dataString = JSON.stringify(data);
 
-    //if not logged in:
-    //alert("you must be logged in to save players");
+      $.ajax({
+        type: "POST",
+        url: "../php/followPlayer.php",
+        data: { data: dataString },
+        success: function (response) {
+          console.log(response);
+          console.log(dataString);
+        },
+      });
+    } else {
+      alert("You must be logged in to follow players.");
+    }
   });
 });
