@@ -93,7 +93,7 @@
         <p style="text-align: center">
           Welcome to our project. We are bringing you an easy way to keep up
           with your favorite players.<br />
-          Just go to the players tab and start looking for the player you want,
+          Just go to the players tab and search for the player you want,
           with just his name and the competition he plays in.
         </p>
         <div>
@@ -104,9 +104,11 @@
             style="float: left"
           />
           <p style="padding: 80px 0; text-align: center">
-            This is an example of what a player search would look like,<br />
+            This is an example of what a player search will look like,<br />
             with all the information about that players, including his profile
-            photo, and the team and league he plays for, and his stats.
+            photo, and the team and league he plays for, and his stats. Click the 
+            follow button to add the player to your list of favorite players, so 
+            you can quickly check their stats each time you log in.
           </p>
         </div>
       </section>
