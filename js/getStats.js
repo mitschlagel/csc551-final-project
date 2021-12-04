@@ -70,7 +70,7 @@ const displayStats = (statistics) => {
 
         <ul>
           
-          <li>Total Appearences: <span id="appearences">${
+          <li>Total Appearences: <span id="appearances">${
             stats.games.appearences
           }</span></li>
           <li>Total Minutes: <span id="minutes">${

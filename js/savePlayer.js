@@ -1,11 +1,6 @@
-// else connect to database
-// get player id
-// send player id to api for stats
 // put player id and names into player table, stats updated into follow table
 // DONT FORGET TO UPDATE THE TABLES PAGE -- just champions league?
-// connection.connect(function (error) {
-//   if (error) throw error;
-//   console.log("Connected!");
+
 const parseCookie = (cookieName) => {
   const regex = new RegExp(cookieName + "=([^;]+)");
   const value = regex.exec(document.cookie);
@@ -14,15 +9,15 @@ const parseCookie = (cookieName) => {
 
 $(document).ready(function () {
   $(document).on("click", ".did-they-play", function () {
-    // if logged in:
     const user = parseCookie("userLog");
 
+    // if logged in:
     if (user) {
       const data = {
         player_id: $("#player_id").text(),
         first_name: $("#first_name").text(),
         last_name: $("#last_name").text(),
-        appearences: $("#appearences").text(),
+        appearances: $("#appearances").text(),
         minutes: $("#minutes").text(),
         goals: $("#goals").text(),
         assists: $("#assists").text(),
@@ -38,6 +33,7 @@ $(document).ready(function () {
         success: function (response) {
           console.log(response);
           console.log(dataString);
+          alert(`You are now following ${data.first_name} ${data.last_name}`);
         },
       });
     } else {

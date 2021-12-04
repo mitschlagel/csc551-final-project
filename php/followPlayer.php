@@ -3,22 +3,37 @@ include ("connectToDB.inc");
 
 $data = $_POST['data'];
 
-$decodedData = json_decode($data, true);
+$stats = json_decode($data, true);
 
-$player_id = $decodedData['player_id'];
-$first_name = $decodedData['first_name'];
-$last_name = $decodedData['last_name'];
+$player_id = $stats['player_id'];
+$first_name = $stats['first_name'];
+$last_name = $stats['last_name'];
+$appearances = $stats['appearances'];
+$minutes = $stats['minutes'];
+$goals = $stats['goals'];
+$assists = $stats['assists'];
+$user = $stats['userName'];
+
 
 $database = connectDB();
 
-$query = "INSERT INTO player (PlayerId, FirstName, LastName) VALUES ($player_id, '$first_name', '$last_name')";
+$addPlayer = "INSERT INTO player (PlayerId, FirstName, LastName) VALUES ('$player_id', '$first_name', '$last_name')";
 
-$result = mysqli_query($database, $query) or die('Query failed: ' . mysqli_error($database)); 
-if ($result) {
+$addPlayerResult = mysqli_query($database, $addPlayer) or die('Failed to add player: ' . mysqli_error($database)); 
+if ($addPlayerResult) {
     echo  "Success! " . $first_name . " " . $last_name . " added to database.";
     
 }
 
+$updateStats = "INSERT INTO follow (Username, PlayerId, Appearances, Minutes, Goals, Assists)
+                VALUES ('$user', '$player_id', '$appearances', '$minutes', '$goals', '$assists')"; 
+
+$updateStatsResult = mysqli_query($database, $updateStats) or die('Failed to update stats: '  . mysqli_error($database));
+if ($addPlayerResult) {
+    echo  "Success! " . $first_name . " " . $last_name . " stats have been updated.";
+    
+}
+mysqli_close($database);
 
 
 ?>
