@@ -199,6 +199,7 @@
         ?>]);
 
       var options = {
+            pieHole: 0.4,
             title: 'Number of minutes per player'};
 
               var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
