@@ -165,6 +165,50 @@
 
       </section>
 
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable(
+            [['Player', 'Number of Minutes'],
+
+        <?php
+
+          $database = connectDB();
+
+          $q1 = "SELECT concat(Firstname,' ',LastName) AS PlayerName, Minutes
+        FROM
+          follow 
+        JOIN player 
+          on follow.PlayerId=player.PlayerId
+        WHERE Username='";
+
+          $query=$q1.$_COOKIE['userLog']."';";
+
+          $result = mysqli_query($database, $query);
+
+          while ($row = mysqli_fetch_array($result)) 
+          {
+            echo "['".$row['PlayerName']."',".$row['Minutes']."],";
+          }
+
+          mysqli_close($database);
+        ?>]);
+
+      var options = {
+            title: 'Number of minutes per player'};
+
+              var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+
+              chart.draw(data, options);
+              }
+      </script>
+
+      <div id="donutchart" style="width: 900px; height: 500px;"></div>
+
       <!-- THESE ARE FOR THE LOGIN AND REGISTER BUTTONS -->
       <section class="login-and-register">
         <div id="login-form" class="login-window">
