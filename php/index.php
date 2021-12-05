@@ -106,8 +106,8 @@
           <p style="padding: 80px 0; text-align: center">
             This is an example of what a player search will look like,<br />
             with all the information about that players, including his profile
-            photo, and the team and league he plays for, and his stats. Click the 
-            follow button to add the player to your list of favorite players, so 
+            photo, and the team and league he plays for, and his stats.<br/> Click the 
+            follow button to add the player to your list of favorite<br/>players, so 
             you can quickly check their stats each time you log in.
           </p>
         </div>

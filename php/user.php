@@ -159,6 +159,11 @@
 
           mysql_close($dataBase);
 
+
+          
+          echo '<div id="donutchart" style="width: 900px; height: 500px;"></div>';
+
+
         }        
 
         ?>
@@ -208,7 +213,6 @@
               }
       </script>
 
-      <div id="donutchart" style="width: 900px; height: 500px;"></div>
 
       <!-- THESE ARE FOR THE LOGIN AND REGISTER BUTTONS -->
       <section class="login-and-register">
