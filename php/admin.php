@@ -146,7 +146,7 @@
             $dataBase = connectDB();
             $q1='DELETE FROM ';
             $q2=' WHERE ';
-            $query=$q1.$_POST['tableName1'].$q2.$_POST['attributeName1'].'='.$_POST['attributeValue1'];
+            $query=$q1.$_POST['tableName1'].$q2.$_POST['attributeName1'].'="'.$_POST['attributeValue1'].'"';
             $result=mysqli_query($dataBase,$query) or die('Query failed: '.mysqli_error($dataBase));
             mysql_close($dataBase);
           }
@@ -155,7 +155,7 @@
             $q1='UPDATE ';
             $q2=' SET ';
             $q3=' WHERE ';
-            $query=$q1.$_POST['tableName2'].$q2.$_POST['attributeName2'].'='.$_POST['attributeValue2'].$q3.$_POST['attributeName3'].'='.$_POST['attributeValue3'];
+            $query=$q1.$_POST['tableName2'].$q2.$_POST['attributeName2'].'='.$_POST['attributeValue2'].$q3.$_POST['attributeName3'].'="'.$_POST['attributeValue3'].'"';
             $result=mysqli_query($dataBase,$query) or die('Query failed: '.mysqli_error($dataBase));
             mysql_close($dataBase);
           }
