@@ -72,10 +72,9 @@
       </div>
       <nav class="header-nav">
         <ul>
-          <li><a href="index.php">Home</a></li>
+        <li><a href="index.php">Home</a></li>
           <li><a href="players.php">Players</a></li>
-          <li><a href="fixtures.php" id="this">Fixtures</a></li>
-          <li><a href="tables.php">Tables</a></li>
+          <li><a href="fixtures.php" id="this">Live Fixtures</a></li>
           <li><a href="user.php">User</a></li>
           <?php
             if(getUserAdmin()){

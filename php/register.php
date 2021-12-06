@@ -63,11 +63,10 @@
       </div>
       <nav class="header-nav">
         <ul>
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="../players.html">Players</a></li>
-          <li><a href="../fixtures.html">Fixtures</a></li>
-          <li><a href="../tables.html">Tables</a></li>
-          <li><a href="user.php" id="this">User</a></li>
+        <li><a href="index.php">Home</a></li>
+          <li><a href="players.php">Players</a></li>
+          <li><a href="fixtures.php">Live Fixtures</a></li>
+          <li><a href="user.php">User</a></li>
           <?php
             if(getUserAdmin()){
               echo '<li><a href="admin.php">Admin</a></li>';
