@@ -17,12 +17,19 @@ $user = $stats['userName'];
 
 $database = connectDB();
 
-$addPlayer = "INSERT INTO player (PlayerId, FirstName, LastName) VALUES ('$player_id', '$first_name', '$last_name')";
+$exists = mysqli_query($database, "SELECT * FROM player WHERE PlayerId = '$player_id'");
 
-$addPlayerResult = mysqli_query($database, $addPlayer) or die('Failed to add player: ' . mysqli_error($database)); 
-if ($addPlayerResult) {
-    echo  "Success! " . $first_name . " " . $last_name . " added to database.";
+if (!$exists) {
+
+    $addPlayer = "INSERT INTO player (PlayerId, FirstName, LastName) VALUES ('$player_id', '$first_name', '$last_name')";
+    $addPlayerResult = mysqli_query($database, $addPlayer) or die('Failed to add player: ' . mysqli_error($database)); 
     
+    if ($addPlayerResult) {
+        echo  "Success! " . $first_name . " " . $last_name . " added to database.";
+    }
+}
+else {
+    echo "Player already in player table.";
 }
 
 $updateStats = "INSERT INTO follow (Username, PlayerId, Appearances, Minutes, Goals, Assists)

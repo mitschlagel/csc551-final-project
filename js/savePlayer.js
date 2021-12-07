@@ -1,6 +1,3 @@
-// put player id and names into player table, stats updated into follow table
-// DONT FORGET TO UPDATE THE TABLES PAGE -- just champions league?
-
 const parseCookie = (cookieName) => {
   const regex = new RegExp(cookieName + "=([^;]+)");
   const value = regex.exec(document.cookie);

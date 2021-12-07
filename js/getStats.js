@@ -1,7 +1,7 @@
 // get search terms from user
 
 const getStats = () => {
-  const player = document.querySelector("#player-name").value; // this probably needs to be processed
+  const player = document.querySelector("#player-name").value;
   const league = document.querySelector("#league-name").value;
   const season = document.querySelector("#season").value;
   const url = "https://v3.football.api-sports.io/players";
@@ -66,7 +66,7 @@ const displayStats = (statistics) => {
         </ul>
       </div>
       <div class="bio-stats">
-        <!-- look at api response, if minutes or appearences YES and green, else, red and NO -->
+        
 
         <ul>
           
