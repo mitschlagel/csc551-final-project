@@ -1,3 +1,5 @@
+// NOTE: We did not end up using this script but it was a lot of fun to build so we are leaving it in the repo.
+
 const axios = require("axios");
 
 // This stays constant with my key

@@ -1,35 +1,45 @@
-// get search terms from user
-
+// Function for searching for and displaying statistics
 const getStats = () => {
+  // Pull values from form on the page
   const player = document.querySelector("#player-name").value;
   const league = document.querySelector("#league-name").value;
   const season = document.querySelector("#season").value;
   const url = "https://v3.football.api-sports.io/players";
 
-  // This stays constant with my key
+  // This is person api key for api-football
   const config = { "x-apisports-key": "569fd3056fbfd09a47a568e3b82163f7" };
 
-  //params base on user input
+  // Construct an object of search params out of the user inputs
   const params = { search: player, league: league, season: season };
 
+  // Use axios to fire a GET request to api-football
   axios
     .get(url, { headers: config, params: params })
     .then((response) => {
+      // Check if player exists
       if (response.data.results == 0) {
+        // Read the response and record the error message and the query that caused the error
         const errorMessage = response.data.errors.requests;
         const query = response.data.parameters.search;
 
+        // Handle the api error
         displayErrors(errorMessage, query);
       } else {
+        // Read response and put relevant part into stats variable
         const stats = response.data.response;
+
+        // Handle the successful response
         displayStats(stats);
       }
     })
+
+    // Handle the axios error, if there is one
     .catch((error) => {
       console.log(error);
     });
 };
 
+// Function that takes a json object and renders it to the DOM through an interpolated string
 const displayStats = (statistics) => {
   const searchResults = document.querySelector(".players");
   searchResults.innerHTML = "";
@@ -113,6 +123,7 @@ const displayStats = (statistics) => {
   });
 };
 
+// Function that handles errors returned by api-football
 const displayErrors = (errorMessage, query) => {
   const searchResults = document.querySelector(".players");
   searchResults.innerHTML = "";
@@ -127,6 +138,7 @@ const displayErrors = (errorMessage, query) => {
   <div class="player-search-error">${message}</div>`;
 };
 
+// Event listener that fires this script when user clicks submit
 document
   .querySelector("#player-search-submit")
   .addEventListener("click", () => getStats());
