@@ -134,10 +134,6 @@
               <button type ="submit">Login</button>
               <button type ="reset" class="clearButton">Clear</button>
             </div>
-        
-            <div class="container" style="background-color:#f1f1f1">
-              <span>Are you not <a href="">registered?</a></span>
-            </div>
           </form>
         </div>
   

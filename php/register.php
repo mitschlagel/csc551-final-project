@@ -88,7 +88,7 @@
             $q1='INSERT INTO users VALUES("';
             $q2='","';
             $q3='");';
-            $query=$q1.$username.$q2.$password.$q2.$email.$q2.$phone.$q2.$birthdate.$q3;
+            $query=$q1.$username.$q2.$password.$q2.$email.$q2.$phone.$q2.$birthdate.$q2."0".$q3;
             $result=mysqli_query($dataBase,$query) or die('Query failed: '.mysqli_error($dataBase));
 
             mysql_close($dataBase);
@@ -114,10 +114,6 @@
                 
               <button type ="submit">Login</button>
               <button type ="reset" class="clearButton">Clear</button>
-            </div>
-        
-            <div class="container" style="background-color:#f1f1f1">
-              <span>Are you not <a href="">registered?</a></span>
             </div>
           </form>
         </div>
