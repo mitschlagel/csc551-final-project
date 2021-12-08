@@ -162,10 +162,6 @@
               <button type ="submit">Register</button>
               <button type ="reset" class="clearButton">Clear</button>
             </div>
-        
-            <div class="container" style="background-color:#f1f1f1">
-              <span>Are you already <a href="">registered?</a></span>
-            </div>
           </form>
         </div>
       </section>
