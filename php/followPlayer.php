@@ -19,17 +19,19 @@ $database = connectDB();
 
 $exists = mysqli_query($database, "SELECT * FROM player WHERE PlayerId = '$player_id'");
 
-if (!$exists) {
 
+if (mysqli_num_rows($exists) > 0) {
+    echo "Player already in player table.";
+    
+} else {
+    
     $addPlayer = "INSERT INTO player (PlayerId, FirstName, LastName) VALUES ('$player_id', '$first_name', '$last_name')";
     $addPlayerResult = mysqli_query($database, $addPlayer) or die('Failed to add player: ' . mysqli_error($database)); 
     
     if ($addPlayerResult) {
         echo  "Success! " . $first_name . " " . $last_name . " added to database.";
     }
-}
-else {
-    echo "Player already in player table.";
+    
 }
 
 $updateStats = "INSERT INTO follow (Username, PlayerId, Appearances, Minutes, Goals, Assists)
