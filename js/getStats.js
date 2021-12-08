@@ -4,6 +4,8 @@ const getStats = () => {
   const player = document.querySelector("#player-name").value;
   const league = document.querySelector("#league-name").value;
   const season = document.querySelector("#season").value;
+
+  // This is the endpoint that returns stats on indidividual players
   const url = "https://v3.football.api-sports.io/players";
 
   // This is person api key for api-football
@@ -14,6 +16,7 @@ const getStats = () => {
 
   // Use axios to fire a GET request to api-football
   axios
+    // GET takes two parameters -- the endpoint to call and a configuration object that contains the headers and query params
     .get(url, { headers: config, params: params })
     .then((response) => {
       // Check if player exists
