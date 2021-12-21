@@ -2,7 +2,7 @@
 
 ## Webpage
 
-You can use this webpage if you click on the following [link](http://did-they-play-soccer.epizy.com/)
+You can use this webpage if you click on the following [link](http://didtheyplay.soccer)
 
 ## api-football documentation
 
